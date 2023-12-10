@@ -1,8 +1,8 @@
 import AdminLayout from "@/Layouts/AdminLayout";
 import { Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
-import { UsersDataTable } from "@/Components/Admins/Users/DataTable";
 import { Separator } from "@/Components/ui/separator";
+import { PaymentsDataTable } from "@/Components/Admins/Payments/DataTable";
 
 export default function Dashboard({ auth }: PageProps) {
     return (
@@ -15,11 +15,10 @@ export default function Dashboard({ auth }: PageProps) {
             }
         >
             <Head title="Dashboard" />
-
             <div className="mt-16 p-4 space-y-2">
                 <div className="border border-gray-300 rounded-md bg-white p-4 flex justify-between">
-                    <span className="text-sm text-slate-900 font-semibold">
-                        Admin Management Users
+                    <span className="text-sm text-slate-500 font-semibold">
+                        Payments Management Transactions
                     </span>
                     <div className="flex space-x-2 text-gray-500 font-semibold">
                         <span className="text-sm">Accounts</span>
@@ -31,7 +30,7 @@ export default function Dashboard({ auth }: PageProps) {
                     </div>
                 </div>
                 <div className="border border-gray-300 rounded-md px-3 bg-white">
-                    <UsersDataTable />
+                    <PaymentsDataTable />
                 </div>
             </div>
         </AdminLayout>
