@@ -2,9 +2,11 @@ import React from "react";
 import SideNavLink from "@/Components/Custom/SideNavLink";
 
 import { GiEyeTarget } from "react-icons/gi";
-import { IoIosChatboxes } from "react-icons/io";
-import { MdAutoGraph } from "react-icons/md";
+import { FaUserCircle } from "react-icons/fa";
+import { PiCardsDuotone } from "react-icons/pi";
+import { MdOutlinePayments } from "react-icons/md";
 import { FiRefreshCw } from "react-icons/fi";
+import { MdAutoGraph } from "react-icons/md";
 
 const nav_components = [
     {
@@ -13,9 +15,19 @@ const nav_components = [
         icon: <GiEyeTarget />,
     },
     {
-        title: "Trade",
-        href: "/trade",
-        icon: <IoIosChatboxes />,
+        title: "User",
+        href: "/users",
+        icon: <FaUserCircle />,
+    },
+    {
+        title: "Cards",
+        href: "/cards",
+        icon: <PiCardsDuotone />,
+    },
+    {
+        title: "Payments",
+        href: "/payments",
+        icon: <MdOutlinePayments />,
     },
     {
         title: "Transactions",
@@ -31,7 +43,7 @@ const nav_components = [
 
 interface SidebarProps {}
 
-const Sidebar: React.FC<SidebarProps> = () => {
+const AdminSidebar: React.FC<SidebarProps> = () => {
     return (
         <div className="mt-16 min-h-fit flex-none w-56 bg-white py-4 border-r border-gray-300">
             <div className="flex flex-col">
@@ -46,4 +58,4 @@ const Sidebar: React.FC<SidebarProps> = () => {
     );
 };
 
-export default Sidebar;
+export default AdminSidebar;

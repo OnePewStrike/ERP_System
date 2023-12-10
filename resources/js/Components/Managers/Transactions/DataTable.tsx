@@ -39,6 +39,7 @@ import Image from "@/Components/Custom/Image";
 import { Badge } from "@/Components/ui/badge";
 import AddDialog from "./dialogs/add-dialog";
 import DeleteDialog from "./dialogs/delete-dialog";
+
 const data: Transactions[] = [
     {
         id: 1,

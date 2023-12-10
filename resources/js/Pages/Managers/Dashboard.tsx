@@ -1,24 +1,10 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
-import React, { useState } from "react";
+import { TransactionsDataTable } from "@/Components/Managers/Transactions/DataTable";
 import { Separator } from "@/Components/ui/separator";
-import Chat from "@/Components/Managers/Trade/Chat";
 
-// import BarChart from "@/Components/Managers/Statistics/BarChart";
-// import UserData from "@/Components/Managers/Statistics/data/data";
-
-export default function Dashboard({ auth }: PageProps) {
-    // const [userData, setUserData] = useState({
-    //     labels: UserData.map((data) => data.year),
-    //     datasets: [
-    //         {
-    //             label: "Users Gained",
-    //             data: UserData.map((data) => data.userGain),
-    //         },
-    //     ],
-    // });
-
+export default function Transactions({ auth }: PageProps) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -33,7 +19,7 @@ export default function Dashboard({ auth }: PageProps) {
             <div className="mt-16 p-4 space-y-2">
                 <div className="border border-gray-300 rounded-md bg-white p-4 flex justify-between">
                     <span className="text-sm text-slate-900 font-semibold">
-                        User Management Trade
+                        User Management Transactions
                     </span>
                     <div className="flex space-x-2 text-gray-500 font-semibold">
                         <span className="text-sm">Accounts</span>
@@ -44,8 +30,8 @@ export default function Dashboard({ auth }: PageProps) {
                         <span className="text-sm">{auth.user.name}</span>
                     </div>
                 </div>
-                <div className="border border-gray-300 rounded-md bg-white">
-                    <Chat name={auth.user.name} />
+                <div className="border border-gray-300 rounded-md px-3 bg-white">
+                    <TransactionsDataTable />
                 </div>
             </div>
         </AuthenticatedLayout>

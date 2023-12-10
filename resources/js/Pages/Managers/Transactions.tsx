@@ -1,7 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
-import { TransactionsDataTable } from "@/Components/Managers/Transactions/data-table";
+import { TransactionsDataTable } from "@/Components/Managers/Transactions/DataTable";
 import { Separator } from "@/Components/ui/separator";
 
 export default function Transactions({ auth }: PageProps) {

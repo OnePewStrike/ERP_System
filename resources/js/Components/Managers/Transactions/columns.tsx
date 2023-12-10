@@ -25,7 +25,7 @@ import {
 } from "@/Components/ui/dropdown-menu";
 import { Input } from "@/Components/ui/input";
 
-import { Transactions } from "@/Pages/Managers/Transactions";
+// import { Transactions } from "@/Pages/Managers/Transactions";
 
 export const columns: ColumnDef<Transactions>[] = [
     {

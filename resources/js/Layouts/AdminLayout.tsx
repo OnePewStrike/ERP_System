@@ -1,7 +1,7 @@
 import { useState, PropsWithChildren, ReactNode } from "react";
 import { User } from "@/types";
 import AuthenticatedNavbar from "@/Layouts/inc/AuthenticatedNavbar";
-import AuthenticatedSidebar from "@/Layouts/inc/AuthenticatedSidebar";
+import AdminSidebar from "./inc/AdminSidebar";
 
 export default function Authenticated({
     user,
@@ -16,7 +16,7 @@ export default function Authenticated({
             <AuthenticatedNavbar user={user} />
 
             <div className="flex min-h-screen">
-                <AuthenticatedSidebar />
+                <AdminSidebar />
                 <div className="flex-1 p">
                     {/* {header && (
                         <header className="bg-white shadow">

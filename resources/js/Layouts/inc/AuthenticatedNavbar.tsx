@@ -15,7 +15,7 @@ interface NavbarProps {
     user: User;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ user }) => {
+const AuthenticatedNavbar: React.FC<NavbarProps> = ({ user }) => {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
@@ -159,4 +159,4 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
     );
 };
 
-export default Navbar;
+export default AuthenticatedNavbar;
