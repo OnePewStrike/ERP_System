@@ -32,8 +32,8 @@ export default function Trade({ auth }: PageProps) {
 
             <div className="mt-16 p-4 space-y-2">
                 <div className="border border-gray-300 rounded-md bg-white p-4 flex justify-between">
-                    <span className="text-sm text-slate-900 font-semibold">
-                        User Management Trade
+                    <span className="text-sm text-slate-500 font-semibold">
+                        User Management Statistics
                     </span>
                     <div className="flex space-x-2 text-gray-500 font-semibold">
                         <span className="text-sm">Accounts</span>
@@ -44,9 +44,7 @@ export default function Trade({ auth }: PageProps) {
                         <span className="text-sm">{auth.user.name}</span>
                     </div>
                 </div>
-                <div className="border border-gray-300 rounded-md bg-white">
-                    <Chat name={auth.user.name} />
-                </div>
+                <div className="border border-gray-300 rounded-md bg-white"></div>
             </div>
         </AuthenticatedLayout>
     );

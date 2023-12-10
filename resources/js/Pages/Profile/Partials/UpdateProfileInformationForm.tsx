@@ -28,6 +28,8 @@ export default function UpdateProfileInformation({
         useForm({
             name: user.name,
             email: user.email,
+            phone: user.phone,
+            nationality: user.nationality,
         });
 
     const submit: FormEventHandler = (e) => {
@@ -100,11 +102,16 @@ export default function UpdateProfileInformation({
                                     id="phone"
                                     type="phone"
                                     className="mt-1 block w-full"
-                                    // value={data.phone}
-                                    // onChange={(e) => setData("phone", e.target.value)}
+                                    value={data.phone}
+                                    onChange={(e) =>
+                                        setData("phone", e.target.value)
+                                    }
                                 />
 
-                                {/* <InputError className="mt-2" message={errors.phone} /> */}
+                                <InputError
+                                    className="mt-2"
+                                    message={errors.phone}
+                                />
                             </div>
                             <div className="space-y-2">
                                 <InputLabel
@@ -116,11 +123,16 @@ export default function UpdateProfileInformation({
                                     id="nationality"
                                     type="nationality"
                                     className="mt-1 block w-full"
-                                    // value={data.nationality}
-                                    // onChange={(e) => setData("nationality", e.target.value)}
+                                    value={data.nationality}
+                                    onChange={(e) =>
+                                        setData("nationality", e.target.value)
+                                    }
                                 />
 
-                                {/* <InputError className="mt-2" message={errors.nationality} /> */}
+                                <InputError
+                                    className="mt-2"
+                                    message={errors.nationality}
+                                />
                             </div>
                             {mustVerifyEmail &&
                                 user.email_verified_at === null && (
