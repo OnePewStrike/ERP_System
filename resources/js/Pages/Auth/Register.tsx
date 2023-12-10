@@ -50,14 +50,13 @@ export default function Register() {
                         id="name"
                         name="name"
                         value={data.name}
-                        className="mt-1 block w-full"
+                        className="block w-full py-3 rounded-2xl"
                         autoComplete="name"
-                        isFocused={true}
                         onChange={(e) => setData("name", e.target.value)}
                         required
                     />
 
-                    <InputError message={errors.name} className="mt-2" />
+                    <InputError message={errors.name} className="" />
                 </div>
 
                 <div className="mt-4">
@@ -68,13 +67,13 @@ export default function Register() {
                         type="email"
                         name="email"
                         value={data.email}
-                        className="mt-1 block w-full"
+                        className="block w-full rounded-2xl py-3"
                         autoComplete="username"
                         onChange={(e) => setData("email", e.target.value)}
                         required
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
+                    <InputError message={errors.email} className="" />
                 </div>
                 <div className="">
                     <InputLabel htmlFor="password" value="Password" />

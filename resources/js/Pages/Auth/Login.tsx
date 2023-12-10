@@ -58,9 +58,8 @@ export default function Login({
                         type="email"
                         name="email"
                         value={data.email}
-                        className="block w-full rounded-2xl py-3"
+                        className="block w-full rounded-2xl py-3 border-gray-300"
                         autoComplete="username"
-                        isFocused={true}
                         onChange={(e) => setData("email", e.target.value)}
                     />
 

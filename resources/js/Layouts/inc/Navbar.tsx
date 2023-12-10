@@ -20,7 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
         useState(false);
 
     return (
-        <nav className="bg-white border-b border-gray-300">
+        <nav className="fixed top-0 left-0 w-full bg-white border-b border-gray-300 z-50">
             <div className="px-4">
                 <div className="flex justify-between h-16">
                     <div className="flex">

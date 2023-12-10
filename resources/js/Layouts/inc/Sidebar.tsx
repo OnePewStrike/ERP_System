@@ -33,7 +33,7 @@ interface SidebarProps {}
 
 const Sidebar: React.FC<SidebarProps> = () => {
     return (
-        <div className="flex-none w-56 bg-white h-[calc(100vh-4.3em)] py-4 border-r border-gray-300">
+        <div className="mt-16 min-h-fit flex-none w-56 bg-white py-4 border-r border-gray-300">
             <div className="flex flex-col">
                 {nav_components.map((component, index) => (
                     <SideNavLink key={index} href={component.href}>
