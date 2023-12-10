@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('manager_transactions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
             $table->enum('type', [
-                'admin',
-                'manager',
+                'Credit',
+                'Debit',
             ]);
-            $table->string('phone')->nullable();
-            $table->string('nationality')->nullable();
-            $table->rememberToken();
+            $table->string('return');
+            $table->enum('status', [
+                'Completed',
+                'Failed',
+                'In Progress',
+            ]);
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('manager_transactions');
     }
 };

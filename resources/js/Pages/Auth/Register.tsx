@@ -14,6 +14,7 @@ export default function Register() {
         email: "",
         password: "",
         password_confirmation: "",
+        type: "manager",
     });
 
     useEffect(() => {

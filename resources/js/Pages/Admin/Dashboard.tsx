@@ -4,7 +4,7 @@ import { PageProps } from "@/types";
 import { UsersDataTable } from "@/Components/Admins/Users/DataTable";
 import { Separator } from "@/Components/ui/separator";
 
-export default function Dashboard({ auth }: PageProps) {
+export default function Overview({ auth }: PageProps) {
     return (
         <AdminLayout
             user={auth.user}

@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Middleware\UserRoleAccess;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,21 +28,36 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Managers/Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::middleware([UserRoleAccess::class . ':manager'])->group(function () {
+        Route::controller(ManagerController::class)->group(function () {
+            Route::get('dashboard', 'index')->name('dashboard');
+        });
+    });
 
-Route::get('/transactions', function () {
-    return Inertia::render('Managers/Transactions');
-})->middleware(['auth', 'verified'])->name('transactions');
+    Route::middleware([UserRoleAccess::class . ':admin'])->group(function () {
+        Route::controller(AdminController::class)->group(function () {
+            Route::get('overview', 'index')->name('overview');
+        });
+    });
+});
 
-Route::get('/trade', function () {
-    return Inertia::render('Managers/Trade');
-})->middleware(['auth', 'verified'])->name('trade');
 
-Route::get('/statistics', function () {
-    return Inertia::render('Managers/Statistics');
-})->middleware(['auth', 'verified'])->name('statistics');
+// Route::get('/dashboard', function () {
+//     return Inertia::render('Managers/Dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::get('/transactions', function () {
+//     return Inertia::render('Managers/Transactions');
+// })->middleware(['auth', 'verified'])->name('transactions');
+
+// Route::get('/trade', function () {
+//     return Inertia::render('Managers/Trade');
+// })->middleware(['auth', 'verified'])->name('trade');
+
+// Route::get('/statistics', function () {
+//     return Inertia::render('Managers/Statistics');
+// })->middleware(['auth', 'verified'])->name('statistics');
 
 
 

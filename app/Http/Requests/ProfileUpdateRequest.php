@@ -21,6 +21,7 @@ class ProfileUpdateRequest extends FormRequest
             ->ignore($this->user()->id)],
             'phone' => ['nullable', 'string', 'max:255'],
             'nationality' => ['nullable', 'string', 'max:255'],
+            'type' => ['nullable', 'string', 'max:255'],
         ];
     }
 }
