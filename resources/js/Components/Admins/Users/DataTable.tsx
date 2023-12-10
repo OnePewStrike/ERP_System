@@ -37,6 +37,9 @@ import {
 } from "@/Components/ui/table";
 import Image from "@/Components/Custom/Image";
 import { Badge } from "@/Components/ui/badge";
+import AddDialog from "./dialogs/AddDialog";
+import EditDialog from "./dialogs/EditDialog";
+import DeleteDialog from "./dialogs/DeleteDialog";
 
 const data: Users[] = [
     {
@@ -217,9 +220,15 @@ export const columns: ColumnDef<Users>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>View</DropdownMenuItem>
-                        <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
+                        <DropdownMenuItem className="px-4">
+                            View
+                        </DropdownMenuItem>
+                        <EditDialog
+                            name={data?.name}
+                            email={data?.email}
+                            status={data?.status}
+                        />
+                        <DeleteDialog name={data?.name} />
                     </DropdownMenuContent>
                 </DropdownMenu>
             );
@@ -270,6 +279,7 @@ export function UsersDataTable() {
                     }
                     className="max-w-sm"
                 />
+                <AddDialog />
                 {/* <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" className="ml-auto">

@@ -1,12 +1,12 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import AdminLayout from "@/Layouts/AdminLayout";
 import { Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
-import { TransactionsDataTable } from "@/Components/Managers/Transactions/DataTable";
+import { UsersDataTable } from "@/Components/Admins/Users/DataTable";
 import { Separator } from "@/Components/ui/separator";
 
-export default function Transactions({ auth }: PageProps) {
+export default function Dashboard({ auth }: PageProps) {
     return (
-        <AuthenticatedLayout
+        <AdminLayout
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
@@ -18,8 +18,8 @@ export default function Transactions({ auth }: PageProps) {
 
             <div className="mt-16 p-4 space-y-2">
                 <div className="border border-gray-300 rounded-md bg-white p-4 flex justify-between">
-                    <span className="text-sm text-slate-500 font-semibold">
-                        User Management Transactions
+                    <span className="text-sm text-slate-900 font-semibold">
+                        Admin Management Users
                     </span>
                     <div className="flex space-x-2 text-gray-500 font-semibold">
                         <span className="text-sm">Accounts</span>
@@ -31,9 +31,9 @@ export default function Transactions({ auth }: PageProps) {
                     </div>
                 </div>
                 <div className="border border-gray-300 rounded-md px-3 bg-white">
-                    <TransactionsDataTable />
+                    <UsersDataTable />
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </AdminLayout>
     );
 }

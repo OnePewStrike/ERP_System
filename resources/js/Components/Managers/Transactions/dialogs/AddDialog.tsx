@@ -181,8 +181,8 @@ export default function AddDialog() {
                                                             <Select>
                                                                 <SelectTrigger>
                                                                     <SelectValue
-                                                                        id="type"
-                                                                        placeholder="Type"
+                                                                        id="status"
+                                                                        placeholder="status"
                                                                         {...field}
                                                                     />
                                                                 </SelectTrigger>

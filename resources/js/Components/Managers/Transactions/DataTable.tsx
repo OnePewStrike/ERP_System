@@ -37,9 +37,9 @@ import {
 } from "@/Components/ui/table";
 import Image from "@/Components/Custom/Image";
 import { Badge } from "@/Components/ui/badge";
-import AddDialog from "./dialogs/add-dialog";
-import DeleteDialog from "./dialogs/delete-dialog";
-import EditDialog from "./dialogs/edit-dialog";
+import AddDialog from "./dialogs/AddDialog";
+import DeleteDialog from "./dialogs/DeleteDialog";
+import EditDialog from "./dialogs/EditDialog";
 
 const data: Transactions[] = [
     {
