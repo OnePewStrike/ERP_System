@@ -68,7 +68,7 @@ const DeleteDialog: React.FC<EditDialogProps> = ({
             <AlertDialogTrigger asChild>
                 <Button
                     variant="outline"
-                    className="justify-start w-full border-0"
+                    className="justify-start w-full border-0 mt-1 "
                     size="sm"
                 >
                     Delete
@@ -78,7 +78,7 @@ const DeleteDialog: React.FC<EditDialogProps> = ({
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
                         <AlertDialogHeader>
-                            <AlertDialogTitle>
+                            <AlertDialogTitle className="text-red-500">
                                 Delete Transaction
                             </AlertDialogTitle>
                             <AlertDialogDescription>
@@ -92,7 +92,7 @@ const DeleteDialog: React.FC<EditDialogProps> = ({
                             <Button
                                 variant="default"
                                 type="submit"
-                                className="w-full sm:w-20"
+                                className="w-full sm:w-20 bg-red-500"
                             >
                                 Delete
                             </Button>

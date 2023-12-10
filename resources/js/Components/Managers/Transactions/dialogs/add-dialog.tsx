@@ -99,7 +99,9 @@ export default function AddDialog() {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Add New Transaction</DialogTitle>
+                    <DialogTitle className="text-slate-500">
+                        Add New Transaction
+                    </DialogTitle>
                 </DialogHeader>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -112,8 +114,10 @@ export default function AddDialog() {
                                             control={form.control}
                                             name="name"
                                             render={({ field }) => (
-                                                <FormItem className="flex-2">
-                                                    <FormLabel>Name*</FormLabel>
+                                                <FormItem className="flex-1">
+                                                    <FormLabel className="text-slate-700">
+                                                        Bank Name*
+                                                    </FormLabel>
                                                     <FormControl>
                                                         <Input
                                                             placeholder=""
@@ -124,6 +128,114 @@ export default function AddDialog() {
                                                 </FormItem>
                                             )}
                                         />
+                                    </div>
+                                    <div className="flex space-x-2">
+                                        <FormField
+                                            control={form.control}
+                                            name="value"
+                                            render={({ field }) => (
+                                                <FormItem className="flex-1">
+                                                    <FormLabel className="text-slate-700">
+                                                        Value*
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder=""
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="return"
+                                            render={({ field }) => (
+                                                <FormItem className="flex-1">
+                                                    <FormLabel className="text-slate-700">
+                                                        Return*
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder=""
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <div className="flex space-x-2">
+                                            <FormField
+                                                control={form.control}
+                                                name="status"
+                                                render={({ field }) => (
+                                                    <FormItem className="flex-1">
+                                                        <FormLabel className="text-slate-700">
+                                                            Status*
+                                                        </FormLabel>
+                                                        <FormControl>
+                                                            <Select>
+                                                                <SelectTrigger>
+                                                                    <SelectValue
+                                                                        id="type"
+                                                                        placeholder="Type"
+                                                                        {...field}
+                                                                    />
+                                                                </SelectTrigger>
+                                                                <SelectContent position="popper">
+                                                                    <SelectItem value="Completed">
+                                                                        Completed
+                                                                    </SelectItem>
+                                                                    <SelectItem value="In Progress">
+                                                                        In
+                                                                        Progress
+                                                                    </SelectItem>
+                                                                    <SelectItem value="Failed">
+                                                                        Failed
+                                                                    </SelectItem>
+                                                                </SelectContent>
+                                                            </Select>
+                                                        </FormControl>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                            <FormField
+                                                control={form.control}
+                                                name="type"
+                                                render={({ field }) => (
+                                                    <FormItem className="flex-1">
+                                                        <FormLabel className="text-slate-700">
+                                                            Type*
+                                                        </FormLabel>
+                                                        <FormControl>
+                                                            <Select>
+                                                                <SelectTrigger>
+                                                                    <SelectValue
+                                                                        id="type"
+                                                                        placeholder="Type"
+                                                                        {...field}
+                                                                    />
+                                                                </SelectTrigger>
+                                                                <SelectContent position="popper">
+                                                                    <SelectItem value="0">
+                                                                        Debit
+                                                                    </SelectItem>
+                                                                    <SelectItem value="1">
+                                                                        Credit
+                                                                    </SelectItem>
+                                                                </SelectContent>
+                                                            </Select>
+                                                        </FormControl>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +250,7 @@ export default function AddDialog() {
                                     </Button>
                                 </DialogClose>
                                 <Button
-                                    className="w-full sm:w-20"
+                                    className="w-full sm:w-20 bg-gradient-to-b from-green-500 to-blue-700"
                                     variant="default"
                                     type="submit"
                                 >

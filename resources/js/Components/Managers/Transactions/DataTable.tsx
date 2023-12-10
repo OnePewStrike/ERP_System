@@ -39,6 +39,7 @@ import Image from "@/Components/Custom/Image";
 import { Badge } from "@/Components/ui/badge";
 import AddDialog from "./dialogs/add-dialog";
 import DeleteDialog from "./dialogs/delete-dialog";
+import EditDialog from "./dialogs/edit-dialog";
 
 const data: Transactions[] = [
     {
@@ -321,6 +322,14 @@ export const columns: ColumnDef<Transactions>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <EditDialog
+                            name={data?.name}
+                            type={data?.type}
+                            value={data?.value}
+                            returnData={data?.return}
+                            status={data?.status}
+                            date={data?.date}
+                        />
                         <DeleteDialog />
                     </DropdownMenuContent>
                 </DropdownMenu>
