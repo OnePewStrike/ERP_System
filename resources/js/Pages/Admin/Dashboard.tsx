@@ -1,10 +1,6 @@
 import AdminLayout from "@/Layouts/AdminLayout";
 import { Head } from "@inertiajs/react";
-import { PageProps } from "@/types";
-import { UsersDataTable } from "@/Components/Admins/Users/DataTable";
 import { Separator } from "@/Components/ui/separator";
-import Image from "@/Components/Custom/Image";
-import { Button } from "@/Components/ui/button";
 import IntroBanner from "@/Components/Admins/Dashboard/IntroBanner";
 import CardTable from "@/Components/Admins/Dashboard/CardTable";
 import { PaymentsDataTable } from "@/Components/Admins/Dashboard/PaymentsDataTable";
