@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('admin_transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('email');
+            $table->string('card');
+            $table->number('amount');
+            $table->date('date');
+            $table->enum('status', [
+                "Successful",
+                "Pending",
+                "Processing",
+                "Cancelled"
+            ]);
             $table->timestamps();
         });
     }

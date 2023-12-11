@@ -10,7 +10,7 @@ class ManagerTransactionsController extends Controller
 {
     public function index(){
         return Inertia::render("Manager/Transactions", [
-            'Transactions' => ManagerTransactions::all(),
+            'transactions' => ManagerTransactions::all(),
         ]);
     }
     public function destroy(ManagerTransactions $managerTransactions)

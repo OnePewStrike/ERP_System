@@ -43,7 +43,7 @@ import Image from "@/Components/Custom/Image";
 
 const formSchema = z.object({
     email: z.string().min(2, {
-        message: "Name must be at least 2 characters.",
+        message: "Email must be at least 2 characters.",
     }),
     card: z.string().min(2, {
         message: "Card must be at least 2 characters.",

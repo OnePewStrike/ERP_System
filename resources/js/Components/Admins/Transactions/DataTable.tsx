@@ -133,196 +133,201 @@ export type Transactions = {
     status: string;
 };
 
-export const columns: ColumnDef<Transactions>[] = [
-    {
-        id: "select",
-        header: ({ table }) => (
-            <Checkbox
-                checked={
-                    table.getIsAllPageRowsSelected() ||
-                    (table.getIsSomePageRowsSelected() && "indeterminate")
+export function TransactionsDataTable({}) {
+    const columns: ColumnDef<Transactions>[] = [
+        {
+            id: "select",
+            header: ({ table }) => (
+                <Checkbox
+                    checked={
+                        table.getIsAllPageRowsSelected() ||
+                        (table.getIsSomePageRowsSelected() && "indeterminate")
+                    }
+                    onCheckedChange={(value) =>
+                        table.toggleAllPageRowsSelected(!!value)
+                    }
+                    aria-label="Select all"
+                />
+            ),
+            cell: ({ row }) => (
+                <Checkbox
+                    checked={row.getIsSelected()}
+                    onCheckedChange={(value) => row.toggleSelected(!!value)}
+                    aria-label="Select row"
+                />
+            ),
+            enableSorting: false,
+            enableHiding: false,
+        },
+        {
+            accessorKey: "email",
+            header: ({ column }) => {
+                return (
+                    <Button
+                        variant="ghost"
+                        onClick={() =>
+                            column.toggleSorting(column.getIsSorted() === "asc")
+                        }
+                    >
+                        Email
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                    </Button>
+                );
+            },
+            cell: ({ row }) => (
+                <div className="text-sm text-slate-500">
+                    {row.getValue("email")}
+                </div>
+            ),
+        },
+        {
+            accessorKey: "id",
+            header: ({ column }) => {
+                return (
+                    <Button
+                        variant="ghost"
+                        onClick={() =>
+                            column.toggleSorting(column.getIsSorted() === "asc")
+                        }
+                    >
+                        Payment ID
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                    </Button>
+                );
+            },
+            cell: ({ row }) => (
+                <div className="text-sm text-slate-500">
+                    {row.getValue("id")}
+                </div>
+            ),
+        },
+        {
+            accessorKey: "card",
+            header: ({ column }) => {
+                return (
+                    <Button
+                        variant="ghost"
+                        onClick={() =>
+                            column.toggleSorting(column.getIsSorted() === "asc")
+                        }
+                    >
+                        Product
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                    </Button>
+                );
+            },
+            cell: ({ row }) => (
+                <div className="text-sm text-slate-500">
+                    {row.getValue("card")}
+                </div>
+            ),
+        },
+        {
+            accessorKey: "amount",
+            header: ({ column }) => {
+                return (
+                    <Button
+                        variant="ghost"
+                        onClick={() =>
+                            column.toggleSorting(column.getIsSorted() === "asc")
+                        }
+                    >
+                        Amount
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                    </Button>
+                );
+            },
+            cell: ({ row }) => (
+                <div className="text-sm text-slate-500">
+                    {row.getValue("amount")}
+                </div>
+            ),
+        },
+        {
+            accessorKey: "date",
+            header: "Date",
+            cell: ({ row }) => (
+                <div className="text-sm text-slate-500">
+                    {row.getValue("date")}
+                </div>
+            ),
+        },
+        {
+            accessorKey: "status",
+            header: ({ column }) => {
+                return (
+                    <Button
+                        variant="ghost"
+                        onClick={() =>
+                            column.toggleSorting(column.getIsSorted() === "asc")
+                        }
+                    >
+                        Status
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                    </Button>
+                );
+            },
+            cell: ({ row }) => {
+                const data = row.original;
+                const value = data.status;
+
+                if (value === "Successful") {
+                    return (
+                        <Badge className="bg-green-500">
+                            {row.getValue("status")}
+                        </Badge>
+                    );
+                } else if (value === "Processing") {
+                    return (
+                        <Badge className="bg-gradient-to-b from-green-500 to-blue-700">
+                            {row.getValue("status")}
+                        </Badge>
+                    );
+                } else if (value === "Pending") {
+                    return (
+                        <Badge className="bg-slate-500">
+                            {row.getValue("status")}
+                        </Badge>
+                    );
+                } else {
+                    return (
+                        <Badge className="bg-red-500">
+                            {row.getValue("status")}
+                        </Badge>
+                    );
                 }
-                onCheckedChange={(value) =>
-                    table.toggleAllPageRowsSelected(!!value)
-                }
-                aria-label="Select all"
-            />
-        ),
-        cell: ({ row }) => (
-            <Checkbox
-                checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
-                aria-label="Select row"
-            />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-    },
-    {
-        accessorKey: "email",
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() =>
-                        column.toggleSorting(column.getIsSorted() === "asc")
-                    }
-                >
-                    Email
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            );
+            },
         },
-        cell: ({ row }) => (
-            <div className="text-sm text-slate-500">
-                {row.getValue("email")}
-            </div>
-        ),
-    },
-    {
-        accessorKey: "id",
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() =>
-                        column.toggleSorting(column.getIsSorted() === "asc")
-                    }
-                >
-                    Payment ID
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            );
-        },
-        cell: ({ row }) => (
-            <div className="text-sm text-slate-500">{row.getValue("id")}</div>
-        ),
-    },
-    {
-        accessorKey: "card",
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() =>
-                        column.toggleSorting(column.getIsSorted() === "asc")
-                    }
-                >
-                    Product
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            );
-        },
-        cell: ({ row }) => (
-            <div className="text-sm text-slate-500">{row.getValue("card")}</div>
-        ),
-    },
-    {
-        accessorKey: "amount",
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() =>
-                        column.toggleSorting(column.getIsSorted() === "asc")
-                    }
-                >
-                    Amount
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            );
-        },
-        cell: ({ row }) => (
-            <div className="text-sm text-slate-500">
-                {row.getValue("amount")}
-            </div>
-        ),
-    },
-    {
-        accessorKey: "date",
-        header: "Date",
-        cell: ({ row }) => (
-            <div className="text-sm text-slate-500">{row.getValue("date")}</div>
-        ),
-    },
-    {
-        accessorKey: "status",
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() =>
-                        column.toggleSorting(column.getIsSorted() === "asc")
-                    }
-                >
-                    Status
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            );
-        },
-        cell: ({ row }) => {
-            const data = row.original;
-            const value = data.status;
+        {
+            id: "actions",
+            enableHiding: false,
+            cell: ({ row }) => {
+                const data = row.original;
 
-            if (value === "Successful") {
                 return (
-                    <Badge className="bg-green-500">
-                        {row.getValue("status")}
-                    </Badge>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" className="h-8 w-8 p-0">
+                                <span className="sr-only">Open menu</span>
+                                <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <EditDialog
+                                email={data?.email}
+                                card={data?.card}
+                                amount={data?.amount}
+                                date={data?.date}
+                                status={data?.status}
+                            />
+                            <DeleteDialog />
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                 );
-            } else if (value === "Processing") {
-                return (
-                    <Badge className="bg-gradient-to-b from-green-500 to-blue-700">
-                        {row.getValue("status")}
-                    </Badge>
-                );
-            } else if (value === "Pending") {
-                return (
-                    <Badge className="bg-slate-500">
-                        {row.getValue("status")}
-                    </Badge>
-                );
-            } else {
-                return (
-                    <Badge className="bg-red-500">
-                        {row.getValue("status")}
-                    </Badge>
-                );
-            }
+            },
         },
-    },
-    {
-        id: "actions",
-        enableHiding: false,
-        cell: ({ row }) => {
-            const data = row.original;
-
-            return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <EditDialog
-                            email={data?.email}
-                            card={data?.card}
-                            amount={data?.amount}
-                            date={data?.date}
-                            status={data?.status}
-                        />
-                        <DeleteDialog />
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            );
-        },
-    },
-];
-
-export function TransactionsDataTable() {
+    ];
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] =
         React.useState<ColumnFiltersState>([]);
@@ -353,14 +358,15 @@ export function TransactionsDataTable() {
         <div className="w-full">
             <div className="flex justify-between items-center py-4">
                 <Input
-                    placeholder="Filter Name..."
+                    placeholder="Filter Email..."
                     value={
-                        (table.getColumn("name")?.getFilterValue() as string) ??
-                        ""
+                        (table
+                            .getColumn("email")
+                            ?.getFilterValue() as string) ?? ""
                     }
                     onChange={(event) =>
                         table
-                            .getColumn("name")
+                            .getColumn("email")
                             ?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"

@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 enum Type: string {
-    case Credit = 'Credit';
-    case Debit = 'Debit';
+    case credit = 'credit';
+    case debit = 'debit';
 };
 
 /**

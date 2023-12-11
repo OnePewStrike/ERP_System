@@ -4,7 +4,7 @@ import { PageProps } from "@/types";
 import { Separator } from "@/Components/ui/separator";
 import { TransactionsDataTable } from "@/Components/Admins/Transactions/DataTable";
 
-export default function Transactions({ auth }: PageProps) {
+export default function Transactions({ auth }) {
     return (
         <AdminLayout
             user={auth.user}
