@@ -23,7 +23,7 @@ export default function Image({
             height={height}
             width={width}
             {...props}
-            className={"object-cover" + className}
+            className={"object-cover " + className}
         />
     );
 }

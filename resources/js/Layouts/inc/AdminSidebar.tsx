@@ -12,32 +12,32 @@ const nav_components = [
     {
         title: "Dashboard",
         href: "/dashboard",
-        icon: <GiEyeTarget />,
+        icon: <GiEyeTarget style={{ color: "green" }} />,
     },
     {
         title: "User",
         href: "/users",
-        icon: <FaUserCircle />,
+        icon: <FaUserCircle style={{ color: "green" }} />,
     },
     {
         title: "Cards",
         href: "/cards",
-        icon: <PiCardsDuotone />,
+        icon: <PiCardsDuotone style={{ color: "green" }} />,
     },
     {
         title: "Payments",
         href: "/payments",
-        icon: <MdOutlinePayments />,
+        icon: <MdOutlinePayments style={{ color: "green" }} />,
     },
     {
         title: "Transactions",
         href: "/transactions",
-        icon: <FiRefreshCw />,
+        icon: <FiRefreshCw style={{ color: "green" }} />,
     },
     {
         title: "Statistics",
         href: "/statistics",
-        icon: <MdAutoGraph />,
+        icon: <MdAutoGraph style={{ color: "green" }} />,
     },
 ];
 

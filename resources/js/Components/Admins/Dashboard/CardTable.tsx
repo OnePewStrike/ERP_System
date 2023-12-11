@@ -92,23 +92,13 @@ export type Card = {
 
 export default function CardTable() {
     return (
-        <div className="h-fit py-4 p-2 space-y-2">
-            <div className="flex justify-between">
-                <header className="text-xl text-slate-500 font-semibold">
-                    Cards
-                </header>
-                <Button
-                    variant="ghost"
-                    className="justify-center bg-gradient-to-b from-green-500 to-blue-700 text-white"
-                >
-                    Add Card
-                </Button>
-            </div>
+        <div className="bg-white p-4 space-y-2 rounded-md">
+            <span className="text-lg font-semibold text-slate-500">Cards</span>
             <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-8">
                 {data.map((card) => (
                     <div
                         key={card.id}
-                        className={`shadow-md rounded-md relative py-8 px-4 flex flex-col items-center justify-center gap-4 ${card.color} hover:transform scale-110 ease-in duration-300`}
+                        className={`shadow-md rounded-md relative py-8 px-4 flex flex-col items-center justify-center gap-4 ${card.color} hover:transform hover:scale-105 ease-in duration-300`}
                     >
                         <div className="absolute right-0 top-0">
                             <Image src={card.flag_path} alt="Flag" width={25} />

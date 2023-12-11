@@ -10,22 +10,22 @@ const nav_components = [
     {
         title: "Dashboard",
         href: "/dashboard",
-        icon: <GiEyeTarget />,
+        icon: <GiEyeTarget style={{ color: "green" }} />,
     },
     {
         title: "Trade",
         href: "/trade",
-        icon: <IoIosChatboxes />,
+        icon: <IoIosChatboxes style={{ color: "green" }} />,
     },
     {
         title: "Transactions",
         href: "/transactions",
-        icon: <FiRefreshCw />,
+        icon: <FiRefreshCw style={{ color: "green" }} />,
     },
     {
         title: "Statistics",
         href: "/statistics",
-        icon: <MdAutoGraph />,
+        icon: <MdAutoGraph style={{ color: "green" }} />,
     },
 ];
 

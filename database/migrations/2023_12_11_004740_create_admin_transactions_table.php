@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('email');
             $table->string('card');
-            $table->number('amount');
+            $table->decimal('amount');
             $table->date('date');
             $table->enum('status', [
                 "Successful",

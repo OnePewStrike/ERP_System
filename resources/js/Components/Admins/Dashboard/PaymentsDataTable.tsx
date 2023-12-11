@@ -37,9 +37,6 @@ import {
 } from "@/Components/ui/table";
 import Image from "@/Components/Custom/Image";
 import { Badge } from "@/Components/ui/badge";
-import AddDialog from "./dialogs/AddDialog";
-import EditDialog from "./dialogs/EditDialog";
-import DeleteDialog from "./dialogs/DeleteDialog";
 
 const data: Payments[] = [
     {
@@ -134,30 +131,30 @@ export type Payments = {
 };
 
 export const columns: ColumnDef<Payments>[] = [
-    {
-        id: "select",
-        header: ({ table }) => (
-            <Checkbox
-                checked={
-                    table.getIsAllPageRowsSelected() ||
-                    (table.getIsSomePageRowsSelected() && "indeterminate")
-                }
-                onCheckedChange={(value) =>
-                    table.toggleAllPageRowsSelected(!!value)
-                }
-                aria-label="Select all"
-            />
-        ),
-        cell: ({ row }) => (
-            <Checkbox
-                checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
-                aria-label="Select row"
-            />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-    },
+    // {
+    //     id: "select",
+    //     header: ({ table }) => (
+    //         <Checkbox
+    //             checked={
+    //                 table.getIsAllPageRowsSelected() ||
+    //                 (table.getIsSomePageRowsSelected() && "indeterminate")
+    //             }
+    //             onCheckedChange={(value) =>
+    //                 table.toggleAllPageRowsSelected(!!value)
+    //             }
+    //             aria-label="Select all"
+    //         />
+    //     ),
+    //     cell: ({ row }) => (
+    //         <Checkbox
+    //             checked={row.getIsSelected()}
+    //             onCheckedChange={(value) => row.toggleSelected(!!value)}
+    //             aria-label="Select row"
+    //         />
+    //     ),
+    //     enableSorting: false,
+    //     enableHiding: false,
+    // },
     {
         accessorKey: "email",
         header: ({ column }) => {
@@ -285,35 +282,27 @@ export const columns: ColumnDef<Payments>[] = [
             <div className="text-sm text-slate-500">{row.getValue("date")}</div>
         ),
     },
-    {
-        id: "actions",
-        enableHiding: false,
-        cell: ({ row }) => {
-            const data = row.original;
+    // {
+    //     id: "actions",
+    //     enableHiding: false,
+    //     cell: ({ row }) => {
+    //         const data = row.original;
 
-            return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <EditDialog
-                            email={data?.email}
-                            type={data?.type}
-                            amount={data?.amount}
-                            status={data?.status}
-                            date={data?.date}
-                        />
-                        <DeleteDialog name={data?.email} />
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            );
-        },
-    },
+    //         return (
+    //             <DropdownMenu>
+    //                 <DropdownMenuTrigger asChild>
+    //                     <Button variant="ghost" className="h-8 w-8 p-0">
+    //                         <span className="sr-only">Open menu</span>
+    //                         <MoreHorizontal className="h-4 w-4" />
+    //                     </Button>
+    //                 </DropdownMenuTrigger>
+    //                 <DropdownMenuContent align="end">
+    //                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
+    //                 </DropdownMenuContent>
+    //             </DropdownMenu>
+    //         );
+    //     },
+    // },
 ];
 
 export function PaymentsDataTable() {
@@ -344,9 +333,12 @@ export function PaymentsDataTable() {
     });
 
     return (
-        <div className="w-full">
-            <div className="flex justify-between items-center py-4">
-                <Input
+        <div className="w-full p-4 rounded-md bg-white space-y-2">
+            <div className="flex justify-between items-center">
+                <span className="text-lg font-semibold text-slate-500">
+                    Payments
+                </span>
+                {/* <Input
                     placeholder="Filter Email..."
                     value={
                         (table
@@ -359,8 +351,8 @@ export function PaymentsDataTable() {
                             ?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
-                />
-                <AddDialog />
+                /> */}
+                {/* <AddDialog /> */}
                 {/* <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" className="ml-auto">
@@ -441,11 +433,11 @@ export function PaymentsDataTable() {
                     </TableBody>
                 </Table>
             </div>
-            <div className="flex items-center justify-end space-x-2 py-4">
-                <div className="flex-1 text-sm text-muted-foreground">
+            <div className="flex items-center justify-center space-x-2 py-4">
+                {/* <div className="flex-1 text-sm text-muted-foreground">
                     {table.getFilteredSelectedRowModel().rows.length} of{" "}
                     {table.getFilteredRowModel().rows.length} row(s) selected.
-                </div>
+                </div> */}
                 <div className="space-x-2">
                     <Button
                         variant="outline"
