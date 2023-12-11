@@ -32,9 +32,16 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        Auth::logoutOtherDevices($request->password);
+
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        $redirects = [
+            'admin' => 'dashboard',
+            'manager' => 'dashboard',
+        ];
+
+        return to_route($redirects[$request->user()->type]);
     }
 
     /**
@@ -42,11 +49,13 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
+        if (Auth::user()) {
+            Auth::guard('web')->logout();
 
-        $request->session()->invalidate();
+            $request->session()->invalidate();
 
-        $request->session()->regenerateToken();
+            $request->session()->regenerateToken();
+        }
 
         return redirect('/');
     }

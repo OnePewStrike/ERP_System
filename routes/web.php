@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -28,36 +29,61 @@ Route::get('/', function () {
     ]);
 });
 
+// Route::get('/', function () {
+//     return Inertia::render('Login');
+// })->name('login');
+// Route::controller(AuthenticatedSessionController::class)
+//     ->group(function () {
+//         Route::post('login', 'store')->name('login.post');
+//         Route::post('logout', 'destroy')->name('logout.post');
+//     });
+
 Route::middleware(['auth'])->group(function () {
     Route::middleware([UserRoleAccess::class . ':manager'])->group(function () {
         Route::controller(ManagerController::class)->group(function () {
             Route::get('dashboard', 'index')->name('dashboard');
         });
+
+        Route::get('/transactions', function () {
+            return Inertia::render('Managers/Transactions');
+        })->name('transactions');
+
+        Route::get('/trade', function () {
+            return Inertia::render('Managers/Trade');
+        })->name('trade');
+
+        Route::get('/statistics', function () {
+            return Inertia::render('Managers/Statistics');
+        })->name('statistics');
     });
 
     Route::middleware([UserRoleAccess::class . ':admin'])->group(function () {
         Route::controller(AdminController::class)->group(function () {
-            Route::get('overview', 'index')->name('overview');
+            Route::get('dashboard', 'index')->name('dashboard');
         });
+
+        Route::get('/cards', function () {
+            return Inertia::render('Admin/Cards');
+        })->name('cards');
+
+        Route::get('/payments', function () {
+            return Inertia::render('Admin/Payments');
+        })->name('Payments');
+
+        Route::get('/statistics', function () {
+            return Inertia::render('Admin/Statistics');
+        })->name('statistics');
+
+        Route::get('/transactions', function () {
+            return Inertia::render('Admin/Transactions');
+        })->name('transactions');
+
+        Route::get('/users', function () {
+            return Inertia::render('Admin/Users');
+        })->name('users');
     });
 });
 
-
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Managers/Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::get('/transactions', function () {
-//     return Inertia::render('Managers/Transactions');
-// })->middleware(['auth', 'verified'])->name('transactions');
-
-// Route::get('/trade', function () {
-//     return Inertia::render('Managers/Trade');
-// })->middleware(['auth', 'verified'])->name('trade');
-
-// Route::get('/statistics', function () {
-//     return Inertia::render('Managers/Statistics');
-// })->middleware(['auth', 'verified'])->name('statistics');
 
 
 

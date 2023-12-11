@@ -14,23 +14,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // User::create([
-        //     'name' => 'Admin',
-        //     'email' => 'admin@example.com',
-        //     'password' => '12345',
-        //     'type' => UserType::admin->value,
-        //     'nationality' => 'Filipino',
-        //     'phone' => '09123456789',
-        // ]);
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => '12345',
+            'type' => UserType::admin->value,
+            'nationality' => 'Filipino',
+            'phone' => '09123456789',
+        ]);
 
-        // User::create([
-        //     'name' => 'Manager',
-        //     'email' => 'manager@example.com',
-        //     'password' => '12345',
-        //     'type' => UserType::manager->value,
-        //     'nationality' => 'Filipino',
-        //     'phone' => '09123456789',
-        // ]);
+        User::create([
+            'name' => 'Manager',
+            'email' => 'manager@example.com',
+            'password' => '12345',
+            'type' => UserType::manager->value,
+            'nationality' => 'Filipino',
+            'phone' => '09123456789',
+        ]);
     }
 
     /**
