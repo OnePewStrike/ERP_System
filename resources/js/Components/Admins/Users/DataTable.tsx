@@ -220,9 +220,11 @@ export const columns: ColumnDef<Users>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem className="px-4">
-                            <a href="/users-view">View</a>
-                        </DropdownMenuItem>
+                        <a href="/users-view" className="text-sm">
+                            <DropdownMenuItem className="px-4">
+                                View
+                            </DropdownMenuItem>
+                        </a>
                         <EditDialog
                             name={data?.name}
                             email={data?.email}

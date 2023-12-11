@@ -37,6 +37,8 @@ import {
 } from "@/Components/ui/table";
 import Image from "@/Components/Custom/Image";
 import { Badge } from "@/Components/ui/badge";
+import BlockDialog from "./dialogs/BlockDialog";
+import DetailsDialog from "./dialogs/DetailsDialogs";
 
 const data: Transactions[] = [
     {
@@ -284,8 +286,14 @@ export function TransactionsDataTable({}) {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem>Payment Details</DropdownMenuItem>
-                            <DropdownMenuItem>Block User</DropdownMenuItem>
+                            <DetailsDialog
+                                email={data?.email}
+                                card={data?.card}
+                                exchange_rate="55"
+                                amount={data?.amount}
+                                date={data?.date}
+                            />
+                            <BlockDialog />
                         </DropdownMenuContent>
                     </DropdownMenu>
                 );

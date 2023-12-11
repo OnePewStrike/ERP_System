@@ -28,6 +28,7 @@ import {
     FormMessage,
 } from "@/Components/ui/form";
 import { router } from "@inertiajs/react";
+import Image from "@/Components/Custom/Image";
 
 interface EditDialogProps {
     name?: string;
@@ -39,7 +40,7 @@ const formSchema = z.object({
     id: z.number(),
 });
 
-const DeleteDialog: React.FC<EditDialogProps> = ({
+const BlockDialog: React.FC<EditDialogProps> = ({
     id,
     name,
     // handleShowSuccessMessage,
@@ -68,33 +69,37 @@ const DeleteDialog: React.FC<EditDialogProps> = ({
             <AlertDialogTrigger asChild>
                 <Button
                     variant="outline"
-                    className="justify-start w-full border-0 mt-1 mx-1 "
+                    className="justify-start w-full border-0 mt-1 "
                     size="sm"
                 >
-                    Delete
+                    Block User
                 </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
-                        <AlertDialogHeader>
-                            <AlertDialogTitle className="text-red-500">
-                                Delete User
+                        <AlertDialogHeader className="py-8  flex flex-col items-center justify-center text-center">
+                            <Image
+                                src="/images/block_img.png"
+                                alt="Block Image"
+                                width={150}
+                            />
+                            <AlertDialogTitle className="text-purple-500">
+                                Block User?
                             </AlertDialogTitle>
-                            <AlertDialogDescription>
-                                Are you sure you want to delete this user? This
-                                action will permanently remove all items and
-                                data associated with it.
+                            <AlertDialogDescription className="w-4/5 text-center">
+                                Clicking the proceed button will deny user
+                                access into the entire system proceed?
                             </AlertDialogDescription>
                         </AlertDialogHeader>
-                        <AlertDialogFooter className="mt-3">
+                        <AlertDialogFooter className="mt-3 flex items-center justify-center">
                             <AlertDialogCancel>Cancel</AlertDialogCancel>
                             <Button
                                 variant="default"
                                 type="submit"
-                                className="w-full sm:w-20 bg-red-500"
+                                className="w-full sm:w-20 bg-gradient-to-b from-pink-500 to-violet-700"
                             >
-                                Delete
+                                Proceed
                             </Button>
                         </AlertDialogFooter>
                     </form>
@@ -104,4 +109,4 @@ const DeleteDialog: React.FC<EditDialogProps> = ({
     );
 };
 
-export default DeleteDialog;
+export default BlockDialog;
