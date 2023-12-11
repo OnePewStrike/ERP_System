@@ -13,7 +13,7 @@ import {
     getSortedRowModel,
     useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, ChevronDown, Link, MoreHorizontal } from "lucide-react";
 
 import { Button } from "@/Components/ui/button";
 import { Checkbox } from "@/Components/ui/checkbox";
@@ -221,7 +221,7 @@ export const columns: ColumnDef<Users>[] = [
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuItem className="px-4">
-                            View
+                            <a href="/users-view">View</a>
                         </DropdownMenuItem>
                         <EditDialog
                             name={data?.name}

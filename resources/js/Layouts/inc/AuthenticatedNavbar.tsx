@@ -6,6 +6,8 @@ import ResponsiveNavLink from "@/Components/Custom/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
 import ApplicationText from "@/Components/Custom/ApplicationText";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
+
 interface User {
     name: string;
     email: string;
@@ -16,6 +18,7 @@ interface NavbarProps {
 }
 
 const AuthenticatedNavbar: React.FC<NavbarProps> = ({ user }) => {
+    const initials = user.name ? user.name.charAt(0).toUpperCase() : "";
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 

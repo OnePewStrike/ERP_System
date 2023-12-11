@@ -81,6 +81,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/users', function () {
             return Inertia::render('Admin/Users');
         })->name('users');
+
+        Route::get('/users-view', function () {
+            return Inertia::render('Admin/UsersView');
+        })->name('users-view');
     });
 });
 

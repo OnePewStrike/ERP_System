@@ -1,12 +1,14 @@
 import AdminLayout from "@/Layouts/AdminLayout";
 import { Head } from "@inertiajs/react";
+import { PageProps } from "@/types";
 import { Separator } from "@/Components/ui/separator";
-import IntroBanner from "@/Components/Admins/Dashboard/IntroBanner";
-import CardTable from "@/Components/Admins/Dashboard/CardTable";
-import { PaymentsDataTable } from "@/Components/Admins/Dashboard/PaymentsDataTable";
-import { TransactionsDataTable } from "@/Components/Admins/Dashboard/TransactionsDataTable";
 
-export default function Dashboard({ auth }) {
+import { Avatar, AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
+import { Button } from "@/Components/ui/button";
+import CardGroup from "@/Components/Admins/UsersView/CardGroup";
+import UserDetails from "@/Components/Admins/UsersView/UserDetails";
+
+export default function UsersView({ auth }: PageProps) {
     return (
         <AdminLayout
             user={auth.user}
@@ -21,7 +23,7 @@ export default function Dashboard({ auth }) {
             <div className="mt-16 p-4 space-y-2">
                 <div className="border border-gray-300 rounded-md bg-white p-4 flex justify-between">
                     <span className="text-sm text-slate-500 font-semibold">
-                        Admin Management | System Dashboard
+                        Admin Management Users Details
                     </span>
                     <div className="flex space-x-2 text-gray-500 font-semibold">
                         <span className="text-sm">Accounts</span>
@@ -32,21 +34,12 @@ export default function Dashboard({ auth }) {
                         <span className="text-sm">{auth.user.name}</span>
                     </div>
                 </div>
-                <div className="relative rounded-md  overflow-hidden space-y-2">
-                    <div className="">
-                        <IntroBanner />
+                <div className="border border-gray-300 rounded-md px-3 pb-6 bg-white">
+                    <div className="flex flex-col justify-center items-center space-y-2 p-8">
+                        <UserDetails auth={auth} />
                     </div>
-
-                    <div className="">
-                        <CardTable />
-                    </div>
-
-                    <div className="">
-                        <PaymentsDataTable />
-                    </div>
-
-                    <div className="">
-                        <TransactionsDataTable />
+                    <div className="mx-48">
+                        <CardGroup />
                     </div>
                 </div>
             </div>
