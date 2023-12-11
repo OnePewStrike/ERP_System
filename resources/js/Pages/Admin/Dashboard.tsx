@@ -4,7 +4,7 @@ import { PageProps } from "@/types";
 import { UsersDataTable } from "@/Components/Admins/Users/DataTable";
 import { Separator } from "@/Components/ui/separator";
 
-export default function Dashboard({ auth }: PageProps) {
+export default function Dashboard({ auth }) {
     return (
         <AdminLayout
             user={auth.user}
@@ -18,7 +18,7 @@ export default function Dashboard({ auth }: PageProps) {
 
             <div className="mt-16 p-4 space-y-2">
                 <div className="border border-gray-300 rounded-md bg-white p-4 flex justify-between">
-                    <span className="text-sm text-slate-900 font-semibold">
+                    <span className="text-sm text-slate-500 font-semibold">
                         Admin Management Users
                     </span>
                     <div className="flex space-x-2 text-gray-500 font-semibold">
