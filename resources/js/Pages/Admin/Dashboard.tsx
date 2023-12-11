@@ -5,6 +5,7 @@ import IntroBanner from "@/Components/Admins/Dashboard/IntroBanner";
 import CardTable from "@/Components/Admins/Dashboard/CardTable";
 import { PaymentsDataTable } from "@/Components/Admins/Dashboard/PaymentsDataTable";
 import { TransactionsDataTable } from "@/Components/Admins/Dashboard/TransactionsDataTable";
+import CardGroup from "@/Components/Admins/Dashboard/CardGroup";
 
 export default function Dashboard({ auth }) {
     return (
@@ -34,6 +35,10 @@ export default function Dashboard({ auth }) {
                 </div>
                 <div className="relative rounded-md  overflow-hidden space-y-2">
                     <div className="">
+                        <CardGroup />
+                    </div>
+
+                    <div className="relative">
                         <IntroBanner />
                     </div>
 

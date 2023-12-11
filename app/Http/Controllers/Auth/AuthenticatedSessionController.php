@@ -37,7 +37,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $redirects = [
-            'admin' => 'dashboard',
+            'admin' => 'overview',
             'manager' => 'dashboard',
         ];
 

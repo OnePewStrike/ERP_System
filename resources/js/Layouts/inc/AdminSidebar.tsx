@@ -16,27 +16,27 @@ const nav_components = [
     },
     {
         title: "User",
-        href: "/users",
+        href: "/admin-users",
         icon: <FaUserCircle style={{ color: "green" }} />,
     },
     {
         title: "Cards",
-        href: "/cards",
+        href: "/admin-cards",
         icon: <PiCardsDuotone style={{ color: "green" }} />,
     },
     {
         title: "Payments",
-        href: "/payments",
+        href: "/admin-payments",
         icon: <MdOutlinePayments style={{ color: "green" }} />,
     },
     {
         title: "Transactions",
-        href: "/transactions",
+        href: "/admin-transactions",
         icon: <FiRefreshCw style={{ color: "green" }} />,
     },
     {
         title: "Statistics",
-        href: "/statistics",
+        href: "/admin-statistics",
         icon: <MdAutoGraph style={{ color: "green" }} />,
     },
 ];

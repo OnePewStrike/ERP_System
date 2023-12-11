@@ -14,17 +14,17 @@ const nav_components = [
     },
     {
         title: "Trade",
-        href: "/trade",
+        href: "/manager-trade",
         icon: <IoIosChatboxes style={{ color: "green" }} />,
     },
     {
         title: "Transactions",
-        href: "/transactions",
+        href: "/manager-transactions",
         icon: <FiRefreshCw style={{ color: "green" }} />,
     },
     {
         title: "Statistics",
-        href: "/statistics",
+        href: "/manager-statistics",
         icon: <MdAutoGraph style={{ color: "green" }} />,
     },
 ];

@@ -2,6 +2,8 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
 import { Separator } from "@/Components/ui/separator";
+import { TransactionsDataTable } from "@/Components/Managers/Dashboard/TransactionsDataTable";
+import CardGroup from "@/Components/Managers/Dashboard/CardGroup";
 
 export default function Dashboard({ auth }: PageProps) {
     return (
@@ -28,8 +30,13 @@ export default function Dashboard({ auth }: PageProps) {
                         <span className="text-sm">{auth.user.name}</span>
                     </div>
                 </div>
-                <div className="relative rounded-md  overflow-hidden space-y-2">
-                    <div className=""></div>
+                <div className="relative rounded-md overflow-hidden space-y-2">
+                    <div className="">
+                        <CardGroup />
+                    </div>
+                    <div className="">
+                        <TransactionsDataTable />
+                    </div>
                 </div>
             </div>
         </AuthenticatedLayout>

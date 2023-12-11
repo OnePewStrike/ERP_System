@@ -20,23 +20,23 @@ use App\Http\Middleware\UserRoleAccess;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
 // Route::get('/', function () {
-//     return Inertia::render('Login');
-// })->name('login');
-// Route::controller(AuthenticatedSessionController::class)
-//     ->group(function () {
-//         Route::post('login', 'store')->name('login.post');
-//         Route::post('logout', 'destroy')->name('logout.post');
-//     });
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
+
+Route::get('/', function () {
+    return Inertia::render('Auth/Login');
+})->name('login');
+Route::controller(AuthenticatedSessionController::class)
+    ->group(function () {
+        Route::post('login', 'store')->name('login.post');
+        Route::post('logout', 'destroy')->name('logout.post');
+    });
 
 Route::middleware(['auth'])->group(function () {
     Route::middleware([UserRoleAccess::class . ':manager'])->group(function () {
@@ -44,45 +44,45 @@ Route::middleware(['auth'])->group(function () {
             Route::get('dashboard', 'index')->name('dashboard');
         });
 
-        Route::get('/transactions', function () {
+        Route::get('/manager-transactions', function () {
             return Inertia::render('Managers/Transactions');
         })->name('transactions');
 
-        Route::get('/trade', function () {
+        Route::get('/manager-trade', function () {
             return Inertia::render('Managers/Trade');
         })->name('trade');
 
-        Route::get('/statistics', function () {
+        Route::get('/manager-statistics', function () {
             return Inertia::render('Managers/Statistics');
         })->name('statistics');
     });
 
     Route::middleware([UserRoleAccess::class . ':admin'])->group(function () {
         Route::controller(AdminController::class)->group(function () {
-            Route::get('dashboard', 'index')->name('dashboard');
+            Route::get('overview', 'index')->name('overview');
         });
 
-        Route::get('/cards', function () {
+        Route::get('/admin-cards', function () {
             return Inertia::render('Admin/Cards');
         })->name('cards');
 
-        Route::get('/payments', function () {
+        Route::get('/admin-payments', function () {
             return Inertia::render('Admin/Payments');
         })->name('Payments');
 
-        Route::get('/statistics', function () {
+        Route::get('/admin-statistics', function () {
             return Inertia::render('Admin/Statistics');
         })->name('statistics');
 
-        Route::get('/transactions', function () {
+        Route::get('/admin-transactions', function () {
             return Inertia::render('Admin/Transactions');
         })->name('transactions');
 
-        Route::get('/users', function () {
+        Route::get('/admin-users', function () {
             return Inertia::render('Admin/Users');
         })->name('users');
 
-        Route::get('/users-view', function () {
+        Route::get('/admin-users-view', function () {
             return Inertia::render('Admin/UsersView');
         })->name('users-view');
     });

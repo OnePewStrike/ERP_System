@@ -92,7 +92,7 @@ export type Card = {
 
 export default function CardTable() {
     return (
-        <div className="bg-white p-4 space-y-2 rounded-md">
+        <div className="bg-white p-4 space-y-2 rounded-md border border-gray-300">
             <span className="text-lg font-semibold text-slate-500">Cards</span>
             <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-8">
                 {data.map((card) => (

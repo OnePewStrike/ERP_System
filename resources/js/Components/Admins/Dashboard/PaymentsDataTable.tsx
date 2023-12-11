@@ -333,7 +333,7 @@ export function PaymentsDataTable() {
     });
 
     return (
-        <div className="w-full p-4 rounded-md bg-white space-y-2">
+        <div className="w-full p-4 rounded-md bg-white space-y-2 border border-gray-300">
             <div className="flex justify-between items-center">
                 <span className="text-lg font-semibold text-slate-500">
                     Payments
