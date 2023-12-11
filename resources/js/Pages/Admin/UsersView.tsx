@@ -8,6 +8,8 @@ import { Button } from "@/Components/ui/button";
 import CardGroup from "@/Components/Admins/UsersView/CardGroup";
 import UserDetails from "@/Components/Admins/UsersView/UserDetails";
 
+import { TransactionsDataTable } from "@/Components/Admins/UsersView/TransactionDataTable";
+
 export default function UsersView({ auth }: PageProps) {
     return (
         <AdminLayout
@@ -34,12 +36,15 @@ export default function UsersView({ auth }: PageProps) {
                         <span className="text-sm">{auth.user.name}</span>
                     </div>
                 </div>
-                <div className="border border-gray-300 rounded-md px-3 pb-6 bg-white">
+                <div className="border border-gray-300 rounded-md px-3 pb-6 bg-white space-y-4">
                     <div className="flex flex-col justify-center items-center space-y-2 p-8">
                         <UserDetails auth={auth} />
                     </div>
                     <div className="mx-48">
                         <CardGroup />
+                    </div>
+                    <div className="">
+                        <TransactionsDataTable />
                     </div>
                 </div>
             </div>
