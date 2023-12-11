@@ -1,6 +1,7 @@
 import Image from "@/Components/Custom/Image";
 import { Button } from "@/Components/ui/button";
 import React from "react";
+import AddDialog from "./dialogs/AddDialog";
 
 const data: Card[] = [
     {
@@ -97,12 +98,7 @@ export default function CardTable() {
                 <header className="text-xl text-slate-500 font-semibold">
                     Cards
                 </header>
-                <Button
-                    variant="ghost"
-                    className="justify-center bg-gradient-to-b from-green-500 to-blue-700 text-white"
-                >
-                    Add Card
-                </Button>
+                <AddDialog />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-8 p-4">
                 {data.map((card) => (
