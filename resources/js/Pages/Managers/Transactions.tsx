@@ -2,8 +2,9 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { TransactionsDataTable } from "@/Components/Managers/Transactions/DataTable";
 import { Separator } from "@/Components/ui/separator";
+import { PageProps } from "@/types";
 
-export default function Transactions({ auth, transactions }) {
+export default function Transactions({ auth }: PageProps) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -30,7 +31,7 @@ export default function Transactions({ auth, transactions }) {
                     </div>
                 </div>
                 <div className="border border-gray-300 rounded-md px-3 bg-white">
-                    <TransactionsDataTable data={transactions} />
+                    <TransactionsDataTable />
                 </div>
             </div>
         </AuthenticatedLayout>

@@ -41,98 +41,98 @@ import AddDialog from "./dialogs/AddDialog";
 import DeleteDialog from "./dialogs/DeleteDialog";
 import EditDialog from "./dialogs/EditDialog";
 
-// const data: Transactions[] = [
-//     {
-//         id: 1,
-//         name: "United States Bank",
-//         type: 0,
-//         value: "$100",
-//         return: "#18000",
-//         status: "Completed",
-//         date: "14/01/2019",
-//     },
-//     {
-//         id: 2,
-//         name: "Global Finance",
-//         type: 1,
-//         value: "$75",
-//         return: "#15000",
-//         status: "Failed",
-//         date: "22/05/2020",
-//     },
-//     {
-//         id: 3,
-//         name: "International Credit Union",
-//         type: 1,
-//         value: "$200",
-//         return: "#22000",
-//         status: "In Progress",
-//         date: "10/09/2021",
-//     },
-//     {
-//         id: 4,
-//         name: "National Savings",
-//         type: 0,
-//         value: "$120",
-//         return: "#19000",
-//         status: "Completed",
-//         date: "05/03/2022",
-//     },
-//     {
-//         id: 5,
-//         name: "Global Investments",
-//         type: 1,
-//         value: "$300",
-//         return: "#25000",
-//         status: "Failed",
-//         date: "18/11/2022",
-//     },
-//     {
-//         id: 6,
-//         name: "Regional Bank",
-//         type: 1,
-//         value: "$50",
-//         return: "#8000",
-//         status: "In Progress",
-//         date: "29/07/2023",
-//     },
-//     {
-//         id: 7,
-//         name: "City Credit Corp",
-//         type: 0,
-//         value: "$180",
-//         return: "#28000",
-//         status: "Completed",
-//         date: "02/04/2019",
-//     },
-//     {
-//         id: 8,
-//         name: "International Finance Group",
-//         type: 0,
-//         value: "$90",
-//         return: "#12000",
-//         status: "Failed",
-//         date: "14/08/2020",
-//     },
-//     {
-//         id: 9,
-//         name: "Global Trust Bank",
-//         type: 1,
-//         value: "$250",
-//         return: "#20000",
-//         status: "In Progress",
-//         date: "07/12/2021",
-//     },
-//     {
-//         id: 10,
-//         name: "Worldwide Credit Union",
-//         type: 0,
-//         value: "$160",
-//         return: "#21000",
-//         status: "Completed",
-//         date: "30/06/2022",
-//     },
-// ];
+const data: Transactions[] = [
+    {
+        id: 1,
+        name: "United States Bank",
+        type: 0,
+        value: "$100",
+        return: "#18000",
+        status: "Completed",
+        date: "14/01/2019",
+    },
+    {
+        id: 2,
+        name: "Global Finance",
+        type: 1,
+        value: "$75",
+        return: "#15000",
+        status: "Failed",
+        date: "22/05/2020",
+    },
+    {
+        id: 3,
+        name: "International Credit Union",
+        type: 1,
+        value: "$200",
+        return: "#22000",
+        status: "In Progress",
+        date: "10/09/2021",
+    },
+    {
+        id: 4,
+        name: "National Savings",
+        type: 0,
+        value: "$120",
+        return: "#19000",
+        status: "Completed",
+        date: "05/03/2022",
+    },
+    {
+        id: 5,
+        name: "Global Investments",
+        type: 1,
+        value: "$300",
+        return: "#25000",
+        status: "Failed",
+        date: "18/11/2022",
+    },
+    {
+        id: 6,
+        name: "Regional Bank",
+        type: 1,
+        value: "$50",
+        return: "#8000",
+        status: "In Progress",
+        date: "29/07/2023",
+    },
+    {
+        id: 7,
+        name: "City Credit Corp",
+        type: 0,
+        value: "$180",
+        return: "#28000",
+        status: "Completed",
+        date: "02/04/2019",
+    },
+    {
+        id: 8,
+        name: "International Finance Group",
+        type: 0,
+        value: "$90",
+        return: "#12000",
+        status: "Failed",
+        date: "14/08/2020",
+    },
+    {
+        id: 9,
+        name: "Global Trust Bank",
+        type: 1,
+        value: "$250",
+        return: "#20000",
+        status: "In Progress",
+        date: "07/12/2021",
+    },
+    {
+        id: 10,
+        name: "Worldwide Credit Union",
+        type: 0,
+        value: "$160",
+        return: "#21000",
+        status: "Completed",
+        date: "30/06/2022",
+    },
+];
 
 export type Transactions = {
     id: number;
@@ -322,14 +322,14 @@ export const columns: ColumnDef<Transactions>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        {/* <EditDialog
+                        <EditDialog
                             name={data?.name}
                             type={data?.type}
                             value={data?.value}
                             returnData={data?.return}
                             status={data?.status}
                             date={data?.date}
-                        /> */}
+                        />
                         <DeleteDialog />
                     </DropdownMenuContent>
                 </DropdownMenu>
@@ -338,7 +338,7 @@ export const columns: ColumnDef<Transactions>[] = [
     },
 ];
 
-export function TransactionsDataTable({ data }) {
+export function TransactionsDataTable() {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] =
         React.useState<ColumnFiltersState>([]);

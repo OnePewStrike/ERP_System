@@ -45,7 +45,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('dashboard', 'index')->name('dashboard');
         });
 
-        Route::resource('/manager-transactions', ManagerTransactionsController::class);
+        Route::get('/manager-transactions', function () {
+            return Inertia::render('Managers/Transactions');
+        })->name('trade');
 
         Route::get('/manager-trade', function () {
             return Inertia::render('Managers/Trade');
