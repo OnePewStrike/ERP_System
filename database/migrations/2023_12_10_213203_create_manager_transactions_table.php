@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\ManagerTransactions;
+use App\Models\ManagerTransactionStatus;
+use App\Models\ManagerTransactionType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +21,7 @@ return new class extends Migration
                 'Credit',
                 'Debit',
             ]);
+            $table->string('value');
             $table->string('return');
             $table->enum('status', [
                 'Completed',
@@ -26,6 +30,15 @@ return new class extends Migration
             ]);
             $table->timestamps();
         });
+
+        ManagerTransactions::create([
+            'name' => 'United States Bank',
+            'type' => ManagerTransactionType::credit->value,
+            'value' => '$100',
+            'return' => '#18000',
+            'status' => ManagerTransactionStatus::completed->value,
+            'date' => '14/01/2019'
+        ]);
     }
 
     /**

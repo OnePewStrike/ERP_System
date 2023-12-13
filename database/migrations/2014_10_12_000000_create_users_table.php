@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+use App\Models\UserType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -26,6 +28,24 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => '12345',
+            'type' => UserType::admin->value,
+            'nationality' => 'Filipino',
+            'phone' => '09123456789',
+        ]);
+
+        User::create([
+            'name' => 'Manager',
+            'email' => 'manager@example.com',
+            'password' => '12345',
+            'type' => UserType::manager->value,
+            'nationality' => 'Filipino',
+            'phone' => '09123456789',
+        ]);
     }
 
     /**

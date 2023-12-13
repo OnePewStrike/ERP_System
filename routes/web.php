@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\ManagerTransactionsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -44,9 +45,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('dashboard', 'index')->name('dashboard');
         });
 
-        Route::get('/manager-transactions', function () {
-            return Inertia::render('Managers/Transactions');
-        })->name('transactions');
+        Route::resource('/manager-transactions', ManagerTransactionsController::class);
 
         Route::get('/manager-trade', function () {
             return Inertia::render('Managers/Trade');

@@ -42,20 +42,16 @@ import { router } from "@inertiajs/react";
 import Image from "@/Components/Custom/Image";
 
 const formSchema = z.object({
-    name: z.string().min(2, {
+    name: z.string().min(1, {
         message: "Name must be at least 2 characters.",
     }),
-    type: z.coerce.number(),
-    value: z.string().min(2, {
-        message: "Value must be at least 2 characters.",
-    }),
-    return: z.string().min(2, {
+    type: z.coerce.string(),
+    value: z.string(),
+    return: z.string().min(1, {
         message: "Return must be at least 2 characters.",
     }),
-    status: z.string().min(2, {
-        message: "Status must be at least 2 characters.",
-    }),
-    date: z.string().min(2, {
+    status: z.string(),
+    date: z.string().min(1, {
         message: "Date must be at least 2 characters.",
     }),
 });
@@ -68,7 +64,7 @@ export default function AddDialog() {
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
-            type: 0,
+            type: "",
             value: "",
             return: "",
             status: "",
@@ -77,14 +73,21 @@ export default function AddDialog() {
     });
 
     // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values);
-        router.post("", {
-            ...values,
-        });
-        setOpen(false);
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        // Check for duplicate name on the server
+        try {
+            router.post("manager_transactions", values, {
+                onError: (error) => {
+                    console.log(error);
+                },
+                onSuccess: () => {
+                    setOpen(false);
+                },
+            });
+        } catch (error) {
+            // Handle fetch error
+            console.log(error);
+        }
     }
 
     return (
@@ -178,23 +181,27 @@ export default function AddDialog() {
                                                             Status*
                                                         </FormLabel>
                                                         <FormControl>
-                                                            <Select>
+                                                            <Select
+                                                                onValueChange={
+                                                                    field.onChange
+                                                                }
+                                                            >
                                                                 <SelectTrigger>
                                                                     <SelectValue
                                                                         id="status"
-                                                                        placeholder="status"
+                                                                        placeholder="Select Status"
                                                                         {...field}
                                                                     />
                                                                 </SelectTrigger>
                                                                 <SelectContent position="popper">
-                                                                    <SelectItem value="Completed">
+                                                                    <SelectItem value="completed">
                                                                         Completed
                                                                     </SelectItem>
-                                                                    <SelectItem value="In Progress">
+                                                                    <SelectItem value="in_progress">
                                                                         In
                                                                         Progress
                                                                     </SelectItem>
-                                                                    <SelectItem value="Failed">
+                                                                    <SelectItem value="failed">
                                                                         Failed
                                                                     </SelectItem>
                                                                 </SelectContent>
@@ -213,19 +220,23 @@ export default function AddDialog() {
                                                             Type*
                                                         </FormLabel>
                                                         <FormControl>
-                                                            <Select>
+                                                            <Select
+                                                                onValueChange={
+                                                                    field.onChange
+                                                                }
+                                                            >
                                                                 <SelectTrigger>
                                                                     <SelectValue
                                                                         id="type"
-                                                                        placeholder="Type"
+                                                                        placeholder="Select Type"
                                                                         {...field}
                                                                     />
                                                                 </SelectTrigger>
                                                                 <SelectContent position="popper">
-                                                                    <SelectItem value="0">
+                                                                    <SelectItem value="debit">
                                                                         Debit
                                                                     </SelectItem>
-                                                                    <SelectItem value="1">
+                                                                    <SelectItem value="credit">
                                                                         Credit
                                                                     </SelectItem>
                                                                 </SelectContent>
