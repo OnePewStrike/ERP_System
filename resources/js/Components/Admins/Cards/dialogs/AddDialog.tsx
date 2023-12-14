@@ -160,22 +160,22 @@ export default function AddDialog() {
                                                             />
                                                         </SelectTrigger>
                                                         <SelectContent position="popper">
-                                                            <SelectItem value="Bitcoin">
+                                                            <SelectItem value="bitcoin">
                                                                 Bitcoin
                                                             </SelectItem>
-                                                            <SelectItem value="Amazon Card">
+                                                            <SelectItem value="amazon">
                                                                 Amazon Card
                                                             </SelectItem>
-                                                            <SelectItem value="Steam Card">
+                                                            <SelectItem value="steam">
                                                                 Steam Card
                                                             </SelectItem>
-                                                            <SelectItem value="iTunes Card">
+                                                            <SelectItem value="itunes">
                                                                 iTunes Card
                                                             </SelectItem>
-                                                            <SelectItem value="Etherium">
+                                                            <SelectItem value="etherium">
                                                                 Etherium
                                                             </SelectItem>
-                                                            <SelectItem value="Uber Card">
+                                                            <SelectItem value="uber">
                                                                 Uber Card
                                                             </SelectItem>
                                                         </SelectContent>

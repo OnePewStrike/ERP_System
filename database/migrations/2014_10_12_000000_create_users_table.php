@@ -25,6 +25,7 @@ return new class extends Migration
             ]);
             $table->string('phone')->nullable();
             $table->string('nationality')->nullable();
+            $table->string('status')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -36,6 +37,7 @@ return new class extends Migration
             'type' => UserType::admin->value,
             'nationality' => 'Filipino',
             'phone' => '09123456789',
+            'status' => 'Active',
         ]);
 
         User::create([
@@ -45,6 +47,7 @@ return new class extends Migration
             'type' => UserType::manager->value,
             'nationality' => 'Filipino',
             'phone' => '09123456789',
+            'status' => 'Active',
         ]);
     }
 

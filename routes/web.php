@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminTransactionsController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CardController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ManagerTransactionsController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -61,29 +65,19 @@ Route::middleware(['auth'])->group(function () {
             Route::get('overview', 'index')->name('overview');
         });
 
-        Route::get('/admin-cards', function () {
-            return Inertia::render('Admin/Cards');
-        })->name('cards');
+        Route::resource('/admin-cards', CardController::class);
 
-        Route::get('/admin-payments', function () {
-            return Inertia::render('Admin/Payments');
-        })->name('Payments');
+        Route::resource('/admin-payments', PaymentController::class);
 
         Route::get('/admin-statistics', function () {
             return Inertia::render('Admin/Statistics');
         })->name('statistics');
 
-        Route::get('/admin-transactions', function () {
-            return Inertia::render('Admin/Transactions');
-        })->name('transactions');
+        Route::resource('/admin-transactions', AdminTransactionsController::class);
 
-        Route::get('/admin-users', function () {
-            return Inertia::render('Admin/Users');
-        })->name('users');
+        Route::resource('/admin-users', UserController::class);
 
-        Route::get('/admin-users-view', function () {
-            return Inertia::render('Admin/UsersView');
-        })->name('users-view');
+        Route::get('/admin-users-view', AdminTransactionsController::class);
     });
 });
 

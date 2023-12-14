@@ -2,12 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\ManagerTransactionStatus;
-use App\Models\ManagerTransactionType;
+use App\Models\AdminTransactionStatus;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
-class UpdateManagerTransactionRequest extends FormRequest
+class UpdateAdminTransactionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +23,11 @@ class UpdateManagerTransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'   => ['string'],
-            'type'   => [ new Enum(ManagerTransactionType::class)],
-            'value'  => ['string'],
-            'return' => ['string'],
-            'status' => [new Enum(ManagerTransactionStatus::class)],
-            'date'   => ['date'],
+            'email' => ['string'],
+            'card' => ['string'],
+            'amount' => ['float'],
+            'date' => ['date'],
+            'status' => [new Enum(AdminTransactionStatus::class)]
         ];
     }
 }

@@ -2,13 +2,12 @@
 
 namespace App\Http\Requests;
 
-use App\Models\ManagerTransactionStatus;
-use App\Models\ManagerTransactionType;
-
+use App\Models\CardCurrency;
+use App\Models\CardType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
-class StoreManagerTransactionRequest extends FormRequest
+class StoreCardRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +25,12 @@ class StoreManagerTransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'   => ['required', 'string'],
-            'type'   => ['required', new Enum(ManagerTransactionType::class)],
-            'value'  => ['required', 'string'],
-            'return' => ['required', 'string'],
-            'status' => ['required', new Enum(ManagerTransactionStatus::class)],
-            'date'   => ['required', 'date'],
+            'name' => ['required', 'string'],
+            'image_path' => ['required', 'string'],
+            'flag_path' => ['required', 'string'],
+            'color' => ['required', 'string'],
+            'type' => ['required', New Enum(CardType::class)],
+            'currency' => ['required', New Enum(CardCurrency::class)]
         ];
     }
 }
