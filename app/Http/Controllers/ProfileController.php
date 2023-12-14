@@ -25,7 +25,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update the user's profile information.
+     * Update the user's profile information.z
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {

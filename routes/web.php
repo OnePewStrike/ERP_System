@@ -77,7 +77,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('/admin-users', UserController::class);
 
-        Route::get('/admin-users-view', AdminTransactionsController::class);
+        Route::get('/admin-users-view', function () {
+            return Inertia::render('Admin/UsersView');
+        })->name('users-view');
     });
 });
 
