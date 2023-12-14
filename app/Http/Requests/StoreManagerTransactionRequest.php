@@ -15,7 +15,7 @@ class StoreManagerTransactionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,10 +27,10 @@ class StoreManagerTransactionRequest extends FormRequest
     {
         return [
             'name'   => ['required', 'string'],
-            'type'   => ['required', new Enum(ManagerTransactionType::class)],
+            'type'   => ['nullable', 'string'],
             'value'  => ['required', 'string'],
             'return' => ['required', 'string'],
-            'status' => ['required', new Enum(ManagerTransactionStatus::class)],
+            'status' => ['nullable', 'string'],
             'date'   => ['required', 'date'],
         ];
     }

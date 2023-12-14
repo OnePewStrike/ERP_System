@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-enum ManagerTransactionType: string {
-    case credit = 'Credit';
-    case debit = 'Debit';
-};
+// enum ManagerTransactionType: string {
+//     case Credit = 'credit';
+//     case Debit = 'debit';
+// };
 
-enum ManagerTransactionStatus: string {
-    case completed = 'Completed';
-    case in_progress = "In Progress";
-    case failed = "Failed";
-}
+// enum ManagerTransactionStatus: string {
+//     case Completed = 'completed';
+//     case InProgress = "in-progress";
+//     case Failed = "failed";
+// }
 
 /**
  * App\Models\ManagerTransactions
@@ -25,6 +25,7 @@ enum ManagerTransactionStatus: string {
  * @property string $return
  * @property string $value
  * @property string $status
+ * @property string $date
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Database\Factories\ManagerTransactionsFactory factory($count = null, $state = [])
@@ -38,6 +39,7 @@ enum ManagerTransactionStatus: string {
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereReturn($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereUpdatedAt($value)
  * @mixin \Eloquent
  */
@@ -52,5 +54,6 @@ class ManagerTransactions extends Model
         'value',
         'return',
         'status',
+        'date',
     ];
 }

@@ -14,7 +14,7 @@ class UpdateManagerTransactionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,11 +26,11 @@ class UpdateManagerTransactionRequest extends FormRequest
     {
         return [
             'name'   => ['string'],
-            'type'   => [ new Enum(ManagerTransactionType::class)],
+            'type'   => ['string'],
             'value'  => ['string'],
             'return' => ['string'],
-            'status' => [new Enum(ManagerTransactionStatus::class)],
-            'date'   => ['date'],
+            'status' => ['string'],
+            'date'   => ['string'],
         ];
     }
 }

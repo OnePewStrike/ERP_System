@@ -55,7 +55,16 @@ export default function AddDialog() {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route(""));
+        try {
+            post(route("manager-transactions"));
+
+            console.log("Form submitted successfully!");
+
+            setOpen(false);
+        } catch (error) {
+            console.error("Form submission error:", error);
+            console.log("Server errors:", errors);
+        }
     };
 
     return (
@@ -108,19 +117,24 @@ export default function AddDialog() {
                                             htmlFor="type"
                                             value="Type"
                                         />
-
-                                        <TextInput
+                                        <select
                                             id="type"
                                             name="type"
                                             value={data.type}
-                                            className="block w-full py-3 rounded-md"
-                                            autoComplete="type"
                                             onChange={(e) =>
                                                 setData("type", e.target.value)
                                             }
+                                            className="block w-full py-3 rounded-md"
                                             required
-                                        />
-
+                                        >
+                                            <option value="" disabled>
+                                                Select Type
+                                            </option>
+                                            <option value="Credit">
+                                                Credit
+                                            </option>
+                                            <option value="Debit">Debit</option>
+                                        </select>
                                         <InputError
                                             message={errors.type}
                                             className=""
@@ -184,22 +198,32 @@ export default function AddDialog() {
                                             htmlFor="status"
                                             value="Status"
                                         />
-
-                                        <TextInput
+                                        <select
                                             id="status"
                                             name="status"
                                             value={data.status}
-                                            className="block w-full py-3 rounded-md"
-                                            autoComplete="status"
                                             onChange={(e) =>
                                                 setData(
                                                     "status",
                                                     e.target.value
                                                 )
                                             }
+                                            className="block w-full py-3 rounded-md"
                                             required
-                                        />
-
+                                        >
+                                            <option value="" disabled>
+                                                Select Status
+                                            </option>
+                                            <option value="Completed">
+                                                Completed
+                                            </option>
+                                            <option value="In Progress">
+                                                In Progress
+                                            </option>
+                                            <option value="Failed">
+                                                Failed
+                                            </option>
+                                        </select>
                                         <InputError
                                             message={errors.status}
                                             className=""
@@ -245,6 +269,7 @@ export default function AddDialog() {
                                 className="w-full sm:w-20 bg-gradient-to-b from-green-500 to-blue-700"
                                 variant="default"
                                 type="submit"
+                                disabled={processing}
                             >
                                 Add
                             </Button>

@@ -17,27 +17,21 @@ return new class extends Migration
         Schema::create('manager_transactions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('type', [
-                'Credit',
-                'Debit',
-            ]);
+            $table->string('type');
             $table->string('value');
             $table->string('return');
-            $table->enum('status', [
-                'Completed',
-                'Failed',
-                'In Progress',
-            ]);
+            $table->string('status');
+            $table->string('date');
             $table->timestamps();
         });
 
         ManagerTransactions::create([
             'name' => 'United States Bank',
-            'type' => ManagerTransactionType::credit->value,
+            'type' => 'Credit',
             'value' => '$100',
             'return' => '#18000',
-            'status' => ManagerTransactionStatus::completed->value,
-            'date' => '14/01/2019'
+            'status' => 'Completed',
+            'date' => '01/14/2019'
         ]);
     }
 

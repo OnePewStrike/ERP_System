@@ -45,15 +45,16 @@ Route::middleware(['auth'])->group(function () {
             Route::get('dashboard', 'index')->name('dashboard');
         });
 
-        Route::get('/manager-transactions', function () {
-            return Inertia::render('Managers/Transactions');
-        })->name('trade');
+        Route::get('manager-transactions', [ManagerTransactionsController::class, 'index'])->name('manager-transactions');
+        Route::post('manager-transactions', [ManagerTransactionsController::class, 'store']);
+        Route::put('manager-transactions', [ManagerTransactionsController::class, 'update'])->name('manager-transactions.edit');
+        Route::delete('manager-transactions', [ManagerTransactionsController::class, 'destroy'])->name('manager-transactions.destroy');
 
-        Route::get('/manager-trade', function () {
+        Route::get('manager-trade', function () {
             return Inertia::render('Managers/Trade');
         })->name('trade');
 
-        Route::get('/manager-statistics', function () {
+        Route::get('manager-statistics', function () {
             return Inertia::render('Managers/Statistics');
         })->name('statistics');
     });
@@ -63,27 +64,27 @@ Route::middleware(['auth'])->group(function () {
             Route::get('overview', 'index')->name('overview');
         });
 
-        Route::get('/admin-cards', function () {
+        Route::get('admin-cards', function () {
             return Inertia::render('Admin/Cards');
         })->name('cards');
 
-        Route::get('/admin-payments', function () {
+        Route::get('admin-payments', function () {
             return Inertia::render('Admin/Payments');
         })->name('Payments');
 
-        Route::get('/admin-statistics', function () {
+        Route::get('admin-statistics', function () {
             return Inertia::render('Admin/Statistics');
         })->name('statistics');
 
-        Route::get('/admin-transactions', function () {
+        Route::get('admin-transactions', function () {
             return Inertia::render('Admin/Transactions');
         })->name('transactions');
 
-        Route::get('/admin-users', function () {
+        Route::get('admin-users', function () {
             return Inertia::render('Admin/Users');
         })->name('users');
 
-        Route::get('/admin-users-view', function () {
+        Route::get('admin-users-view', function () {
             return Inertia::render('Admin/UsersView');
         })->name('users-view');
     });

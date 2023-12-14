@@ -6,6 +6,10 @@ use App\Http\Requests\StoreManagerTransactionRequest;
 use App\Http\Requests\UpdateManagerTransactionRequest;
 use Illuminate\Http\Request;
 use App\Models\ManagerTransactions;
+use App\Models\ManagerTransactionStatus;
+use App\Models\ManagerTransactionType;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rules\Enum;
 use Inertia\Inertia;
 
 class ManagerTransactionsController extends Controller
@@ -17,11 +21,10 @@ class ManagerTransactionsController extends Controller
     }
 
     public function store(StoreManagerTransactionRequest $request) {
+
         $validated = $request->validated();
 
-        ManagerTransactions::create([
-            ...$validated,
-        ]);
+        ManagerTransactions::create($validated);
 
         return back();
     }

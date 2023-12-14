@@ -1,10 +1,6 @@
-import React, { useState } from "react";
-
+import { useEffect, FormEventHandler, useState } from "react";
+import { Head, Link, useForm } from "@inertiajs/react";
 import { Button } from "@/Components/ui/button";
-
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 
 import {
     AlertDialog,
@@ -28,6 +24,7 @@ import {
     FormMessage,
 } from "@/Components/ui/form";
 import { router } from "@inertiajs/react";
+import TextInput from "@/Components/Custom/TextInput";
 
 interface EditDialogProps {
     name?: string;
@@ -35,33 +32,39 @@ interface EditDialogProps {
     // handleShowSuccessMessage: () => void;
 }
 
-const formSchema = z.object({
-    id: z.number(),
-});
-
 const DeleteDialog: React.FC<EditDialogProps> = ({
     id,
     name,
     // handleShowSuccessMessage,
 }) => {
     const [open, setOpen] = useState(false);
-    // 1. Define your form.
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            id: 0,
-        },
+
+    const {
+        data,
+        setData,
+        delete: destroy,
+        processing,
+        errors,
+        reset,
+    } = useForm({
+        id: id,
+        name: name,
     });
 
-    // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        router.delete(`/criterion/${id}`);
-        setOpen(false);
+    const submit: FormEventHandler = (e) => {
+        e.preventDefault();
 
-        // handleShowSuccessMessage();
-    }
+        try {
+            destroy(route(`manager-transactions.destroy`));
+
+            console.log("Form submitted successfully!");
+
+            setOpen(false);
+        } catch (error) {
+            console.error("Form submission error:", error);
+            console.log("Server errors:", errors);
+        }
+    };
 
     return (
         <AlertDialog open={open} onOpenChange={setOpen}>
@@ -75,30 +78,39 @@ const DeleteDialog: React.FC<EditDialogProps> = ({
                 </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
-                <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)}>
-                        <AlertDialogHeader>
-                            <AlertDialogTitle className="text-red-500">
-                                Delete Transaction
-                            </AlertDialogTitle>
-                            <AlertDialogDescription>
-                                Are you sure you want to delete this
-                                transaction? This action will permanently remove
-                                all items and data associated with it.
-                            </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter className="mt-3">
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <Button
-                                variant="default"
-                                type="submit"
-                                className="w-full sm:w-20 bg-red-500"
-                            >
-                                Delete
-                            </Button>
-                        </AlertDialogFooter>
-                    </form>
-                </Form>
+                <form onSubmit={submit}>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle className="text-red-500">
+                            Delete Transaction
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                            Are you sure you want to delete this transaction?
+                            This action will permanently remove all items and
+                            data associated with it.
+                        </AlertDialogDescription>
+
+                        <TextInput
+                            id="name"
+                            name="name"
+                            value={data.name}
+                            className="block w-full py-3 rounded-md hidden"
+                            autoComplete="name"
+                            onChange={(e) => setData("name", e.target.value)}
+                            required
+                        />
+                    </AlertDialogHeader>
+                    <AlertDialogFooter className="mt-3">
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <Button
+                            variant="default"
+                            type="submit"
+                            className="w-full sm:w-20 bg-red-500"
+                            disabled={processing}
+                        >
+                            Delete
+                        </Button>
+                    </AlertDialogFooter>
+                </form>
             </AlertDialogContent>
         </AlertDialog>
     );
