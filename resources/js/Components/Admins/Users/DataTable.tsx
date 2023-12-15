@@ -221,7 +221,7 @@ export const columns: ColumnDef<Users>[] = [
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <a
-                            href="/users-view"
+                            href="/admin-users-view"
                             className="text-sm hover:bg-gray-300 cursor-pointer"
                         >
                             <DropdownMenuItem className="px-4 py-2 my-1">
@@ -234,7 +234,7 @@ export const columns: ColumnDef<Users>[] = [
                             email={data?.email}
                             status={data?.status}
                         />
-                        <DeleteDialog name={data?.id} />
+                        <DeleteDialog id={data?.id} />
                     </DropdownMenuContent>
                 </DropdownMenu>
             );

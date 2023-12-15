@@ -108,11 +108,11 @@ const EditDialog: React.FC<EditDialogProps> = ({
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button
-                    className="flex justify-start bg-gradient-to-b from-green-500 to-blue-700"
-                    variant="default"
+                    className="w-full flex justify-start"
+                    variant="ghost"
                     size="sm"
                 >
-                    Edit Transaction
+                    Edit
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">

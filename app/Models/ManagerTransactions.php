@@ -22,8 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $name
  * @property string $type
- * @property string $return
  * @property float $value
+ * @property string $return
  * @property string $status
  * @property string $date
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -36,8 +36,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereReturn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereUpdatedAt($value)

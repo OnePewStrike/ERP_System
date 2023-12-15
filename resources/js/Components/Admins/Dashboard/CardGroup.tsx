@@ -13,13 +13,13 @@ export default function CardGroup({ totalUsers, totalTransactions }) {
         {
             id: 1,
             name: "Total Amount Users",
-            img_path: "/images/total_amount_earned.png",
+            img_path: "/images/total_circle.png",
             value: totalUsers,
         },
         {
             id: 2,
             name: "Total Number of Transactions",
-            img_path: "/images/total_num_of_trans.png",
+            img_path: "/images/total_circle.png",
             value: totalTransactions,
         },
     ];
@@ -28,11 +28,22 @@ export default function CardGroup({ totalUsers, totalTransactions }) {
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
             {data.map((card) => (
                 <div
-                    className="bg-white py-2 px-32 flex justify-between items-center border border-slate-300 shadow-md rounded-md hover:transform hover:scale-105 ease-in duration-300"
+                    className="bg-white py-2 px-40 flex justify-between items-center border border-slate-300 shadow-md rounded-md hover:transform hover:scale-105 ease-in duration-300"
                     key={card.id}
                 >
-                    <Image src={card.img_path} alt="" width={155} />
-                    <div className="flex flex-col items-between justify-center gap-2">
+                    <div className="flex-1 relative">
+                        <Image
+                            src={card.img_path}
+                            alt=""
+                            width={155}
+                            className="w-full h-full object-cover rounded-full"
+                        />
+                        <div className="absolute top-16 left-16 transform -translate-x-[70%] -translate-y-[30%] text-2xl text-amber-900">
+                            {card.value}
+                        </div>
+                    </div>
+
+                    <div className="flex-1 flex flex-col items-between justify-center gap-2">
                         <span className="text-sm font-semibold text-slate-500">
                             {card.name}
                         </span>

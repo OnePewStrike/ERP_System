@@ -44,6 +44,7 @@ export default function Dashboard({
                             totalTransactions={totalTransactions}
                         />
                     </div>
+
                     <div className="">
                         <TransactionsDataTable data={transactions} />
                     </div>
