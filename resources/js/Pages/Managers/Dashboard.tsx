@@ -5,7 +5,14 @@ import { Separator } from "@/Components/ui/separator";
 import { TransactionsDataTable } from "@/Components/Managers/Dashboard/TransactionsDataTable";
 import CardGroup from "@/Components/Managers/Dashboard/CardGroup";
 
-export default function Dashboard({ auth, transactions }) {
+export default function Dashboard({
+    auth,
+    transactions,
+    totalUsers,
+    totalTransactions,
+}) {
+    console.log(typeof totalUsers, typeof totalTransactions);
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -32,7 +39,10 @@ export default function Dashboard({ auth, transactions }) {
                 </div>
                 <div className="relative rounded-md overflow-hidden space-y-2">
                     <div className="">
-                        <CardGroup />
+                        <CardGroup
+                            totalUsers={totalUsers}
+                            totalTransactions={totalTransactions}
+                        />
                     </div>
                     <div className="">
                         <TransactionsDataTable data={transactions} />

@@ -7,7 +7,14 @@ import { PaymentsDataTable } from "@/Components/Admins/Dashboard/PaymentsDataTab
 import { TransactionsDataTable } from "@/Components/Admins/Dashboard/TransactionsDataTable";
 import CardGroup from "@/Components/Admins/Dashboard/CardGroup";
 
-export default function Dashboard({ auth, cards, payments, transactions }) {
+export default function Dashboard({
+    auth,
+    cards,
+    payments,
+    transactions,
+    totalUsers,
+    totalTransactions,
+}) {
     return (
         <AdminLayout
             user={auth.user}
@@ -35,7 +42,10 @@ export default function Dashboard({ auth, cards, payments, transactions }) {
                 </div>
                 <div className="relative rounded-md  overflow-hidden space-y-2">
                     <div className="">
-                        <CardGroup />
+                        <CardGroup
+                            totalUsers={totalUsers}
+                            totalTransactions={totalTransactions}
+                        />
                     </div>
 
                     <div className="relative">

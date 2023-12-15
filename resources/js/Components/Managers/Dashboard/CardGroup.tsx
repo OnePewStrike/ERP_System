@@ -1,21 +1,6 @@
 import Image from "@/Components/Custom/Image";
 import React from "react";
 
-const data: Card[] = [
-    {
-        id: 1,
-        name: "Total Amount Users",
-        img_path: "/images/total_amount_earned.png",
-        value: 22.8,
-    },
-    {
-        id: 2,
-        name: "Total Number of Transactions",
-        img_path: "/images/total_num_of_trans.png",
-        value: 22.8,
-    },
-];
-
 export type Card = {
     id: number;
     name: string;
@@ -23,7 +8,22 @@ export type Card = {
     value: number;
 };
 
-export default function CardGroup() {
+export default function CardGroup({ totalUsers, totalTransactions }) {
+    const data: Card[] = [
+        {
+            id: 1,
+            name: "Total Amount Users",
+            img_path: "/images/total_amount_earned.png",
+            value: totalUsers,
+        },
+        {
+            id: 2,
+            name: "Total Number of Transactions",
+            img_path: "/images/total_num_of_trans.png",
+            value: totalTransactions,
+        },
+    ];
+
     return (
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
             {data.map((card) => (
