@@ -41,6 +41,7 @@ import Image from "@/Components/Custom/Image";
 import { Head, Link, useForm } from "@inertiajs/react";
 
 interface EditDialogProps {
+    id: number;
     name: string;
     type: string;
     value: string;
@@ -50,6 +51,7 @@ interface EditDialogProps {
 }
 
 const EditDialog: React.FC<EditDialogProps> = ({
+    id,
     name,
     type,
     value,
@@ -59,7 +61,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
 }) => {
     const [open, setOpen] = useState(false);
 
-    const { data, setData, put, processing, errors, reset } = useForm({
+    const { data, setData, patch, processing, errors, reset } = useForm({
         name: name,
         type: type,
         value: value,
@@ -72,7 +74,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
         e.preventDefault();
 
         try {
-            put(route("manager-transactions.edit"));
+            patch(route(`manager-transactions.edit`));
 
             console.log("Form submitted successfully!");
 

@@ -47,7 +47,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('manager-transactions', [ManagerTransactionsController::class, 'index'])->name('manager-transactions');
         Route::post('manager-transactions', [ManagerTransactionsController::class, 'store']);
-        Route::put('manager-transactions', [ManagerTransactionsController::class, 'update'])->name('manager-transactions.edit');
+        Route::patch('manager-transactions', [ManagerTransactionsController::class, 'update'])->name('manager-transactions.edit');
         Route::delete('manager-transactions', [ManagerTransactionsController::class, 'destroy'])->name('manager-transactions.destroy');
 
         Route::get('manager-trade', function () {

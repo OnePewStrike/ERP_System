@@ -25,12 +25,12 @@ class UpdateManagerTransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'   => ['string'],
-            'type'   => ['string'],
-            'value'  => ['string'],
-            'return' => ['string'],
-            'status' => ['string'],
-            'date'   => ['string'],
+            'name'   => ['required', 'string'],
+            'type'   => ['required', 'string'],
+            'value'  => ['required', 'string'],
+            'return' => ['required', 'string'],
+            'status' => ['required', 'string'],
+            'date'   => ['required', 'string'],
         ];
     }
 }

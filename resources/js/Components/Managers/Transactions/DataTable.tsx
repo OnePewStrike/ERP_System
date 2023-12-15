@@ -323,6 +323,7 @@ export const columns: ColumnDef<Transactions>[] = [
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <EditDialog
+                            id={data?.id}
                             name={data?.name}
                             type={data?.type}
                             value={data?.value}
