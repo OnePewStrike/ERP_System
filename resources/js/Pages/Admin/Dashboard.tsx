@@ -7,7 +7,7 @@ import { PaymentsDataTable } from "@/Components/Admins/Dashboard/PaymentsDataTab
 import { TransactionsDataTable } from "@/Components/Admins/Dashboard/TransactionsDataTable";
 import CardGroup from "@/Components/Admins/Dashboard/CardGroup";
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth, cards, payments, transactions }) {
     return (
         <AdminLayout
             user={auth.user}
@@ -43,15 +43,15 @@ export default function Dashboard({ auth }) {
                     </div>
 
                     <div className="">
-                        <CardTable />
+                        <CardTable data={cards} />
                     </div>
 
                     <div className="">
-                        <PaymentsDataTable />
+                        <PaymentsDataTable data={payments} />
                     </div>
 
                     <div className="">
-                        <TransactionsDataTable />
+                        <TransactionsDataTable data={transactions} />
                     </div>
                 </div>
             </div>

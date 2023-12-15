@@ -335,7 +335,7 @@ export const columns: ColumnDef<Transactions>[] = [
     // },
 ];
 
-export function TransactionsDataTable() {
+export function TransactionsDataTable({ data }) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] =
         React.useState<ColumnFiltersState>([]);

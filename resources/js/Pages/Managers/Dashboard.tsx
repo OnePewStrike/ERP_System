@@ -5,7 +5,7 @@ import { Separator } from "@/Components/ui/separator";
 import { TransactionsDataTable } from "@/Components/Managers/Dashboard/TransactionsDataTable";
 import CardGroup from "@/Components/Managers/Dashboard/CardGroup";
 
-export default function Dashboard({ auth }: PageProps) {
+export default function Dashboard({ auth, transactions }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -35,7 +35,7 @@ export default function Dashboard({ auth }: PageProps) {
                         <CardGroup />
                     </div>
                     <div className="">
-                        <TransactionsDataTable />
+                        <TransactionsDataTable data={transactions} />
                     </div>
                 </div>
             </div>

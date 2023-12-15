@@ -93,15 +93,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
-
-        // Route::get('manager-transactions', [ManagerTransactionsController::class, 'index'])->name('manager-transactions');
-        // Route::post('manager-transactions', [ManagerTransactionsController::class, 'store']);
-        // Route::put('manager-transactions', [ManagerTransactionsController::class, 'update'])->name('manager-transactions.edit');
-        // Route::delete('manager-transactions', [ManagerTransactionsController::class, 'destroy'])->name('manager-transactions.destroy');
-
-
-        // Route::get('admin-payments', [PaymentsController::class, 'index'])->name('admin-payments');
-        // Route::post('admin-payments', [PaymentsController::class, 'store']);
-        // Route::put('admin-payments', [PaymentsController::class, 'update'])->name('admin-payments.edit');
-        // Route::delete('admin-payments', [PaymentsController::class, 'destroy'])->name('admin-payments.destroy');

@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-
+import { useEffect, FormEventHandler, useState } from "react";
+import InputError from "@/Components/Custom/InputError";
+import InputLabel from "@/Components/Custom/InputLabel";
+import PrimaryButton from "@/Components/Custom/PrimaryButton";
+import TextInput from "@/Components/Custom/TextInput";
 import { Button } from "@/Components/ui/button";
 import { Label } from "@/Components/ui/label";
 import { Input } from "@/Components/ui/input";
 import { Textarea } from "@/Components/ui/textarea";
-
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 
 import {
     Dialog,
@@ -38,48 +37,40 @@ import {
     FormLabel,
     FormMessage,
 } from "@/Components/ui/form";
-import { router } from "@inertiajs/react";
-import Image from "@/Components/Custom/Image";
-
-const formSchema = z.object({
-    img_path: z.string().min(2, {
-        message: "Image must be at least 2 characters.",
-    }),
-    name: z.string().min(2, {
-        message: "Name must be at least 2 characters.",
-    }),
-    type: z.string().min(2, {
-        message: "Type must be at least 2 characters.",
-    }),
-    currency: z.string().min(2, {
-        message: "Currency must be at least 2 characters.",
-    }),
-});
+import { Head, Link, useForm } from "@inertiajs/react";
 
 export default function AddDialog() {
     const [open, setOpen] = useState(false);
 
-    // 1. Define your form.
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            img_path: "",
-            name: "",
-            type: "",
-            currency: "",
-        },
+    const { data, setData, post, processing, errors, reset } = useForm({
+        name: "",
+        image_path: "",
+        flag_path: "",
+        color: "",
     });
 
-    // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values);
-        router.post("", {
-            ...values,
-        });
-        setOpen(false);
-    }
+    const submit: FormEventHandler = (e) => {
+        e.preventDefault();
+
+        try {
+            post(route("admin-cards.store"));
+
+            console.log(
+                "check: ",
+                data.name,
+                data.image_path,
+                data.flag_path,
+                data.color
+            );
+
+            console.log("Form submitted successfully!");
+
+            setOpen(false);
+        } catch (error) {
+            console.error("Form submission error:", error);
+            console.log("Server errors:", errors);
+        }
+    };
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -88,173 +79,168 @@ export default function AddDialog() {
                     className="bg-gradient-to-b from-green-500 to-blue-700"
                     variant="default"
                 >
-                    Add User
+                    Add Card
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle className="text-slate-500">
-                        Add New User
+                        Add New Card
                     </DialogTitle>
                 </DialogHeader>
-                <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)}>
-                        <div className="grid cols-2 space-y-3">
-                            <div className="space-y-1">
-                                {/* <span className="text-xs font-bold">DETAILS</span> */}
-                                <div className="space-y-1">
-                                    <FormField
-                                        control={form.control}
-                                        name="img_path"
-                                        render={({ field }) => (
-                                            <FormItem className="flex-1">
-                                                <FormLabel className="text-slate-700">
-                                                    File Image
-                                                </FormLabel>
-                                                <FormControl>
-                                                    <div className="grid w-full max-w-sm items-center gap-1.5">
-                                                        <Input
-                                                            id="picture"
-                                                            type="file"
-                                                            {...field}
-                                                        />
-                                                    </div>
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
+                <form onSubmit={submit}>
+                    <div className="grid cols-2 space-y-3">
+                        <div className="space-y-1">
+                            <div className="grid grid-cols-1 gap-2">
+                                <div>
+                                    <InputLabel htmlFor="name" value="Name" />
+
+                                    <TextInput
+                                        id="name"
                                         name="name"
-                                        render={({ field }) => (
-                                            <FormItem className="flex-1">
-                                                <FormLabel className="text-slate-700">
-                                                    Card Name*
-                                                </FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        placeholder=""
-                                                        {...field}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
+                                        value={data.name}
+                                        className="block w-full py-3 rounded-md"
+                                        autoComplete="name"
+                                        onChange={(e) =>
+                                            setData("name", e.target.value)
+                                        }
+                                        required
                                     />
-                                    <FormField
-                                        control={form.control}
-                                        name="type"
-                                        render={({ field }) => (
-                                            <FormItem className="flex-1">
-                                                <FormLabel className="text-slate-700">
-                                                    Type*
-                                                </FormLabel>
-                                                <FormControl>
-                                                    <Select>
-                                                        <SelectTrigger>
-                                                            <SelectValue
-                                                                id="type"
-                                                                placeholder="Select Type*"
-                                                                {...field}
-                                                            />
-                                                        </SelectTrigger>
-                                                        <SelectContent position="popper">
-                                                            <SelectItem value="Bitcoin">
-                                                                Bitcoin
-                                                            </SelectItem>
-                                                            <SelectItem value="Amazon Card">
-                                                                Amazon Card
-                                                            </SelectItem>
-                                                            <SelectItem value="Steam Card">
-                                                                Steam Card
-                                                            </SelectItem>
-                                                            <SelectItem value="iTunes Card">
-                                                                iTunes Card
-                                                            </SelectItem>
-                                                            <SelectItem value="Etherium">
-                                                                Etherium
-                                                            </SelectItem>
-                                                            <SelectItem value="Uber Card">
-                                                                Uber Card
-                                                            </SelectItem>
-                                                        </SelectContent>
-                                                    </Select>
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
+
+                                    <InputError
+                                        message={errors.name}
+                                        className=""
                                     />
-                                    <FormField
-                                        control={form.control}
-                                        name="currency"
-                                        render={({ field }) => (
-                                            <FormItem className="flex-1">
-                                                <FormLabel className="text-slate-700">
-                                                    Currency*
-                                                </FormLabel>
-                                                <FormControl>
-                                                    <Select>
-                                                        <SelectTrigger>
-                                                            <SelectValue
-                                                                id="currency"
-                                                                placeholder="Select Currency"
-                                                                {...field}
-                                                            />
-                                                        </SelectTrigger>
-                                                        <SelectContent position="popper">
-                                                            <SelectItem value="usd">
-                                                                US Dollars (USD)
-                                                            </SelectItem>
-                                                            <SelectItem value="eur">
-                                                                Euro (EUR)
-                                                            </SelectItem>
-                                                            <SelectItem value="gbp">
-                                                                British Pound
-                                                                (GBP)
-                                                            </SelectItem>
-                                                            <SelectItem value="jpy">
-                                                                Japanese Yen
-                                                                (JPY)
-                                                            </SelectItem>
-                                                            <SelectItem value="aud">
-                                                                Australian
-                                                                Dollar (AUD)
-                                                            </SelectItem>
-                                                            <SelectItem value="cad">
-                                                                Canadian Dollar
-                                                                (CAD)
-                                                            </SelectItem>
-                                                        </SelectContent>
-                                                    </Select>
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
+                                </div>
+                                <div>
+                                    <InputLabel
+                                        htmlFor="image_path"
+                                        value="Image"
+                                    />
+                                    <select
+                                        id="image_path"
+                                        name="image_path"
+                                        value={data.image_path}
+                                        onChange={(e) =>
+                                            setData(
+                                                "image_path",
+                                                e.target.value
+                                            )
+                                        }
+                                        className="block w-full py-3 rounded-md border border-slate-300"
+                                        required
+                                    >
+                                        <option value="" disabled>
+                                            Select Card Type
+                                        </option>
+                                        <option value="/images/cards/amazon.png">
+                                            Amazon
+                                        </option>
+                                        <option value="/images/cards/itunes.png">
+                                            iTunes
+                                        </option>
+                                        <option value="/images/cards/google_play.png">
+                                            Google Play
+                                        </option>
+                                        <option value="/images/cards/steam.png">
+                                            Steam
+                                        </option>
+                                        <option value="/images/cards/others.png">
+                                            Other Cards
+                                        </option>
+                                    </select>
+                                    <InputError
+                                        message={errors.image_path}
+                                        className=""
+                                    />
+                                </div>
+                                <div>
+                                    <InputLabel
+                                        htmlFor="flag_path"
+                                        value="Flag"
+                                    />
+                                    <select
+                                        id="flag_path"
+                                        name="flag_path"
+                                        value={data.flag_path}
+                                        onChange={(e) =>
+                                            setData("flag_path", e.target.value)
+                                        }
+                                        className="block w-full py-3 rounded-md border border-slate-300"
+                                        required
+                                    >
+                                        <option value="" disabled>
+                                            Select Country
+                                        </option>
+                                        <option value="/images/flags/usa.png">
+                                            USA Flag
+                                        </option>
+                                        <option value="/images/flags/canada.png">
+                                            Canada Flag
+                                        </option>
+                                        <option value="/images/flags/australia.png">
+                                            Australia Flag
+                                        </option>
+                                    </select>
+                                    <InputError
+                                        message={errors.flag_path}
+                                        className=""
+                                    />
+                                </div>
+                                <div>
+                                    <InputLabel htmlFor="color" value="Color" />
+                                    <select
+                                        id="color"
+                                        name="color"
+                                        value={data.color}
+                                        onChange={(e) =>
+                                            setData("color", e.target.value)
+                                        }
+                                        className="block w-full py-3 rounded-md border border-slate-300"
+                                        required
+                                    >
+                                        <option value="" disabled>
+                                            Select BG Color
+                                        </option>
+                                        <option value="bg-gradient-to-b from-blue-300 to-teal-400">
+                                            Gradient Blue
+                                        </option>
+                                        <option value="bg-gradient-to-b from-indigo-500 to-violet-700">
+                                            Gradient Indigo
+                                        </option>
+                                        <option value="bg-slate-700">
+                                            Slate
+                                        </option>
+                                        <option value="bg-white">White</option>
+                                    </select>
+                                    <InputError
+                                        message={errors.color}
+                                        className=""
                                     />
                                 </div>
                             </div>
-                            <DialogFooter>
-                                <DialogClose>
-                                    <Button
-                                        className="w-full sm:w-20"
-                                        variant="outline"
-                                        type="button"
-                                    >
-                                        Cancel
-                                    </Button>
-                                </DialogClose>
-                                <Button
-                                    className="w-full sm:w-20 bg-gradient-to-b from-green-500 to-blue-700"
-                                    variant="default"
-                                    type="submit"
-                                >
-                                    Add
-                                </Button>
-                            </DialogFooter>
                         </div>
-                    </form>
-                </Form>
+                        <DialogFooter>
+                            <DialogClose>
+                                <Button
+                                    className="w-full sm:w-20"
+                                    variant="outline"
+                                    type="button"
+                                >
+                                    Cancel
+                                </Button>
+                            </DialogClose>
+                            <Button
+                                className="w-full sm:w-20 bg-gradient-to-b from-green-500 to-blue-700"
+                                variant="default"
+                                type="submit"
+                                disabled={processing}
+                            >
+                                Add
+                            </Button>
+                        </DialogFooter>
+                    </div>
+                </form>
             </DialogContent>
         </Dialog>
     );
