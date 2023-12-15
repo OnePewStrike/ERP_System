@@ -41,88 +41,88 @@ import AddDialog from "./dialogs/AddDialog";
 import EditDialog from "./dialogs/EditDialog";
 import DeleteDialog from "./dialogs/DeleteDialog";
 
-const data: Payments[] = [
-    {
-        id: 1,
-        type: "User",
-        amount: 39000,
-        date: "19/08/2019",
-        status: "Paid",
-        email: "ramonridwan@gmail.com",
-    },
-    {
-        id: 2,
-        type: "Agent",
-        amount: 55000,
-        date: "25/09/2019",
-        status: "Processing",
-        email: "agent1@example.com",
-    },
-    {
-        id: 3,
-        type: "User",
-        amount: 75000,
-        date: "10/11/2019",
-        status: "Pending",
-        email: "user2@example.com",
-    },
-    {
-        id: 4,
-        type: "Agent",
-        amount: 42000,
-        date: "03/05/2020",
-        status: "Cancelled",
-        email: "agent2@example.com",
-    },
-    {
-        id: 5,
-        type: "User",
-        amount: 63000,
-        date: "15/08/2020",
-        status: "Paid",
-        email: "user3@example.com",
-    },
-    {
-        id: 6,
-        type: "Agent",
-        amount: 48000,
-        date: "22/12/2020",
-        status: "Processing",
-        email: "agent3@example.com",
-    },
-    {
-        id: 7,
-        type: "User",
-        amount: 89000,
-        date: "07/03/2021",
-        status: "Pending",
-        email: "user4@example.com",
-    },
-    {
-        id: 8,
-        type: "Agent",
-        amount: 56000,
-        date: "18/06/2021",
-        status: "Cancelled",
-        email: "agent4@example.com",
-    },
-    {
-        id: 9,
-        type: "User",
-        amount: 42000,
-        date: "29/09/2021",
-        status: "Paid",
-        email: "user5@example.com",
-    },
-    {
-        id: 10,
-        type: "Agent",
-        amount: 71000,
-        date: "12/12/2021",
-        status: "Processing",
-        email: "agent5@example.com",
-    },
-];
+// const data: Payments[] = [
+//     {
+//         id: 1,
+//         type: "User",
+//         amount: 39000,
+//         date: "19/08/2019",
+//         status: "Paid",
+//         email: "ramonridwan@gmail.com",
+//     },
+//     {
+//         id: 2,
+//         type: "Agent",
+//         amount: 55000,
+//         date: "25/09/2019",
+//         status: "Processing",
+//         email: "agent1@example.com",
+//     },
+//     {
+//         id: 3,
+//         type: "User",
+//         amount: 75000,
+//         date: "10/11/2019",
+//         status: "Pending",
+//         email: "user2@example.com",
+//     },
+//     {
+//         id: 4,
+//         type: "Agent",
+//         amount: 42000,
+//         date: "03/05/2020",
+//         status: "Cancelled",
+//         email: "agent2@example.com",
+//     },
+//     {
+//         id: 5,
+//         type: "User",
+//         amount: 63000,
+//         date: "15/08/2020",
+//         status: "Paid",
+//         email: "user3@example.com",
+//     },
+//     {
+//         id: 6,
+//         type: "Agent",
+//         amount: 48000,
+//         date: "22/12/2020",
+//         status: "Processing",
+//         email: "agent3@example.com",
+//     },
+//     {
+//         id: 7,
+//         type: "User",
+//         amount: 89000,
+//         date: "07/03/2021",
+//         status: "Pending",
+//         email: "user4@example.com",
+//     },
+//     {
+//         id: 8,
+//         type: "Agent",
+//         amount: 56000,
+//         date: "18/06/2021",
+//         status: "Cancelled",
+//         email: "agent4@example.com",
+//     },
+//     {
+//         id: 9,
+//         type: "User",
+//         amount: 42000,
+//         date: "29/09/2021",
+//         status: "Paid",
+//         email: "user5@example.com",
+//     },
+//     {
+//         id: 10,
+//         type: "Agent",
+//         amount: 71000,
+//         date: "12/12/2021",
+//         status: "Processing",
+//         email: "agent5@example.com",
+//     },
+// ];
 
 export type Payments = {
     id: number;
@@ -316,7 +316,7 @@ export const columns: ColumnDef<Payments>[] = [
     },
 ];
 
-export function PaymentsDataTable() {
+export function PaymentsDataTable({ data }) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] =
         React.useState<ColumnFiltersState>([]);

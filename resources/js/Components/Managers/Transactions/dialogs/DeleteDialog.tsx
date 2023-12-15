@@ -55,7 +55,7 @@ const DeleteDialog: React.FC<EditDialogProps> = ({
         e.preventDefault();
 
         try {
-            destroy(route(`manager-transactions/${id}`));
+            destroy(route(`manager-transactions.destroy`));
 
             console.log("Form submitted successfully!");
 

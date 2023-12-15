@@ -124,7 +124,7 @@ export default function AddDialog() {
                                             onChange={(e) =>
                                                 setData("type", e.target.value)
                                             }
-                                            className="block w-full py-3 rounded-md"
+                                            className="block w-full py-3 rounded-md border border-slate-300"
                                             required
                                         >
                                             <option value="" disabled>
@@ -208,7 +208,7 @@ export default function AddDialog() {
                                                     e.target.value
                                                 )
                                             }
-                                            className="block w-full py-3 rounded-md"
+                                            className="block w-full py-3 rounded-md border border-slate-300"
                                             required
                                         >
                                             <option value="" disabled>

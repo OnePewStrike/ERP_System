@@ -4,7 +4,7 @@ import { PageProps } from "@/types";
 import { Separator } from "@/Components/ui/separator";
 import { PaymentsDataTable } from "@/Components/Admins/Payments/DataTable";
 
-export default function Payments({ auth }: PageProps) {
+export default function Payments({ auth, payments }) {
     return (
         <AdminLayout
             user={auth.user}
@@ -30,7 +30,7 @@ export default function Payments({ auth }: PageProps) {
                     </div>
                 </div>
                 <div className="border border-gray-300 rounded-md px-3 bg-white">
-                    <PaymentsDataTable />
+                    <PaymentsDataTable data={payments} />
                 </div>
             </div>
         </AdminLayout>

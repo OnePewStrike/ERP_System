@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ManagerTransactionsController;
+use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -45,9 +46,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('dashboard', 'index')->name('dashboard');
         });
 
+        // Route::resource('manager-transactions', ManagerTransactionsController::class);
         Route::get('manager-transactions', [ManagerTransactionsController::class, 'index'])->name('manager-transactions');
         Route::post('manager-transactions', [ManagerTransactionsController::class, 'store']);
-        Route::patch('manager-transactions', [ManagerTransactionsController::class, 'update'])->name('manager-transactions.edit');
+        Route::put('manager-transactions', [ManagerTransactionsController::class, 'update'])->name('manager-transactions.edit');
         Route::delete('manager-transactions', [ManagerTransactionsController::class, 'destroy'])->name('manager-transactions.destroy');
 
         Route::get('manager-trade', function () {
@@ -56,7 +58,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('manager-statistics', function () {
             return Inertia::render('Managers/Statistics');
-        })->name('statistics');
+        })->name('manager-statistics');
     });
 
     Route::middleware([UserRoleAccess::class . ':admin'])->group(function () {
@@ -68,13 +70,16 @@ Route::middleware(['auth'])->group(function () {
             return Inertia::render('Admin/Cards');
         })->name('cards');
 
-        Route::get('admin-payments', function () {
-            return Inertia::render('Admin/Payments');
-        })->name('Payments');
+        // Route::resource('admin-payments', PaymentsController::class);
+
+        Route::get('admin-payments', [PaymentsController::class, 'index'])->name('admin-payments');
+        Route::post('admin-payments', [PaymentsController::class, 'store']);
+        Route::put('admin-payments', [PaymentsController::class, 'update'])->name('admin-payments.edit');
+        Route::delete('admin-payments', [PaymentsController::class, 'destroy'])->name('admin-payments.destroy');
 
         Route::get('admin-statistics', function () {
             return Inertia::render('Admin/Statistics');
-        })->name('statistics');
+        })->name('admin-statistics');
 
         Route::get('admin-transactions', function () {
             return Inertia::render('Admin/Transactions');

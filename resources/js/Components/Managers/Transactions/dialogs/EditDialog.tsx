@@ -61,7 +61,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
 }) => {
     const [open, setOpen] = useState(false);
 
-    const { data, setData, patch, processing, errors, reset } = useForm({
+    const { data, setData, put, processing, errors, reset } = useForm({
         name: name,
         type: type,
         value: value,
@@ -74,7 +74,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
         e.preventDefault();
 
         try {
-            patch(route(`manager-transactions.edit`));
+            put(route(`manager-transactions.edit`));
 
             console.log("Form submitted successfully!");
 
@@ -88,10 +88,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button
-                    className="w-full bg-gradient-to-b from-green-500 to-blue-700 justify-start"
-                    variant="default"
-                >
+                <Button className="w-full justify-start" variant="ghost">
                     Edit Transaction
                 </Button>
             </DialogTrigger>
@@ -142,7 +139,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
                                             onChange={(e) =>
                                                 setData("type", e.target.value)
                                             }
-                                            className="block w-full py-3 rounded-md"
+                                            className="block w-full py-3 rounded-md border border-slate-300"
                                             required
                                         >
                                             <option value="" disabled>
@@ -226,7 +223,7 @@ const EditDialog: React.FC<EditDialogProps> = ({
                                                     e.target.value
                                                 )
                                             }
-                                            className="block w-full py-3 rounded-md"
+                                            className="block w-full py-3 rounded-md border border-slate-300"
                                             required
                                         >
                                             <option value="" disabled>
