@@ -91,7 +91,7 @@ export default function AddDialog() {
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle className="text-slate-500">
-                        Edit Transaction
+                        Add New Transaction
                     </DialogTitle>
                 </DialogHeader>
                 <Form {...form}>
@@ -267,7 +267,7 @@ export default function AddDialog() {
                                     variant="default"
                                     type="submit"
                                 >
-                                    Update
+                                    Add
                                 </Button>
                             </DialogFooter>
                         </div>

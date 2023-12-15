@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property string $type
  * @property string $return
- * @property string $value
+ * @property float $value
  * @property string $status
  * @property string $date
  * @property \Illuminate\Support\Carbon|null $created_at

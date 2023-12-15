@@ -22,11 +22,11 @@ class UpdatePaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
-            'type' => ['required', 'string'],
-            'amount' => ['required', 'string'],
-            'date' => ['required', 'date'],
-            'status' => ['required', 'string'],
+            'email' => ['string', 'email'],
+            'type' => ['string'],
+            'amount' => ['string'],
+            'date' => ['date'],
+            'status' => ['string'],
         ];
     }
 }

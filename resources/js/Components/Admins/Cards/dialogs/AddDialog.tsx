@@ -1,12 +1,13 @@
-import { useEffect, FormEventHandler, useState } from "react";
-import InputError from "@/Components/Custom/InputError";
-import InputLabel from "@/Components/Custom/InputLabel";
-import PrimaryButton from "@/Components/Custom/PrimaryButton";
-import TextInput from "@/Components/Custom/TextInput";
+import React, { useState } from "react";
+
 import { Button } from "@/Components/ui/button";
 import { Label } from "@/Components/ui/label";
 import { Input } from "@/Components/ui/input";
 import { Textarea } from "@/Components/ui/textarea";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 
 import {
     Dialog,
@@ -37,47 +38,50 @@ import {
     FormLabel,
     FormMessage,
 } from "@/Components/ui/form";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { router } from "@inertiajs/react";
+import Image from "@/Components/Custom/Image";
+
+const formSchema = z.object({
+    name: z.string(),
+    image_path: z.string(),
+    flag_path: z.string(),
+    color: z.string(),
+});
 
 export default function AddDialog() {
     const [open, setOpen] = useState(false);
 
-    const { data, setData, post, processing, errors, reset } = useForm({
-        name: "",
-        image_path: "",
-        flag_path: "",
-        color: "",
+    // 1. Define your form.
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            name: "",
+            image_path: "",
+            flag_path: "",
+            color: "",
+        },
     });
 
-    const submit: FormEventHandler = (e) => {
-        e.preventDefault();
-
+    // 2. Define a submit handler.
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
-            post(route("admin-cards.store"));
-
-            console.log(
-                "check: ",
-                data.name,
-                data.image_path,
-                data.flag_path,
-                data.color
-            );
-
-            console.log("Form submitted successfully!");
-
+            console.log(values);
+            router.post("admin-cards", {
+                ...values,
+            });
             setOpen(false);
         } catch (error) {
-            console.error("Form submission error:", error);
-            console.log("Server errors:", errors);
+            console.error("Error submitting form:", error);
         }
-    };
+    }
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button
-                    className="bg-gradient-to-b from-green-500 to-blue-700"
+                    className="flex justify-start bg-gradient-to-b from-green-500 to-blue-700"
                     variant="default"
+                    size="sm"
                 >
                     Add Card
                 </Button>
@@ -88,159 +92,180 @@ export default function AddDialog() {
                         Add New Card
                     </DialogTitle>
                 </DialogHeader>
-                <form onSubmit={submit}>
-                    <div className="grid cols-2 space-y-3">
-                        <div className="space-y-1">
-                            <div className="grid grid-cols-1 gap-2">
-                                <div>
-                                    <InputLabel htmlFor="name" value="Name" />
-
-                                    <TextInput
-                                        id="name"
-                                        name="name"
-                                        value={data.name}
-                                        className="block w-full py-3 rounded-md"
-                                        autoComplete="name"
-                                        onChange={(e) =>
-                                            setData("name", e.target.value)
-                                        }
-                                        required
-                                    />
-
-                                    <InputError
-                                        message={errors.name}
-                                        className=""
-                                    />
-                                </div>
-                                <div>
-                                    <InputLabel
-                                        htmlFor="image_path"
-                                        value="Image"
-                                    />
-                                    <select
-                                        id="image_path"
-                                        name="image_path"
-                                        value={data.image_path}
-                                        onChange={(e) =>
-                                            setData(
-                                                "image_path",
-                                                e.target.value
-                                            )
-                                        }
-                                        className="block w-full py-3 rounded-md border border-slate-300"
-                                        required
-                                    >
-                                        <option value="" disabled>
-                                            Select Card Type
-                                        </option>
-                                        <option value="/images/cards/amazon.png">
-                                            Amazon
-                                        </option>
-                                        <option value="/images/cards/itunes.png">
-                                            iTunes
-                                        </option>
-                                        <option value="/images/cards/google_play.png">
-                                            Google Play
-                                        </option>
-                                        <option value="/images/cards/steam.png">
-                                            Steam
-                                        </option>
-                                        <option value="/images/cards/others.png">
-                                            Other Cards
-                                        </option>
-                                    </select>
-                                    <InputError
-                                        message={errors.image_path}
-                                        className=""
-                                    />
-                                </div>
-                                <div>
-                                    <InputLabel
-                                        htmlFor="flag_path"
-                                        value="Flag"
-                                    />
-                                    <select
-                                        id="flag_path"
-                                        name="flag_path"
-                                        value={data.flag_path}
-                                        onChange={(e) =>
-                                            setData("flag_path", e.target.value)
-                                        }
-                                        className="block w-full py-3 rounded-md border border-slate-300"
-                                        required
-                                    >
-                                        <option value="" disabled>
-                                            Select Country
-                                        </option>
-                                        <option value="/images/flags/usa.png">
-                                            USA Flag
-                                        </option>
-                                        <option value="/images/flags/canada.png">
-                                            Canada Flag
-                                        </option>
-                                        <option value="/images/flags/australia.png">
-                                            Australia Flag
-                                        </option>
-                                    </select>
-                                    <InputError
-                                        message={errors.flag_path}
-                                        className=""
-                                    />
-                                </div>
-                                <div>
-                                    <InputLabel htmlFor="color" value="Color" />
-                                    <select
-                                        id="color"
-                                        name="color"
-                                        value={data.color}
-                                        onChange={(e) =>
-                                            setData("color", e.target.value)
-                                        }
-                                        className="block w-full py-3 rounded-md border border-slate-300"
-                                        required
-                                    >
-                                        <option value="" disabled>
-                                            Select BG Color
-                                        </option>
-                                        <option value="bg-gradient-to-b from-blue-300 to-teal-400">
-                                            Gradient Blue
-                                        </option>
-                                        <option value="bg-gradient-to-b from-indigo-500 to-violet-700">
-                                            Gradient Indigo
-                                        </option>
-                                        <option value="bg-slate-700">
-                                            Slate
-                                        </option>
-                                        <option value="bg-white">White</option>
-                                    </select>
-                                    <InputError
-                                        message={errors.color}
-                                        className=""
-                                    />
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)}>
+                        <div className="grid cols-2 space-y-3">
+                            <div className="space-y-1">
+                                {/* <span className="text-xs font-bold">DETAILS</span> */}
+                                <div className="space-y-1">
+                                    <div className="grid grid-cols-1 gap-2">
+                                        <FormField
+                                            control={form.control}
+                                            name="name"
+                                            render={({ field }) => (
+                                                <FormItem className="flex-1">
+                                                    <FormLabel className="text-slate-700">
+                                                        Name*
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder=""
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="image_path"
+                                            render={({ field }) => (
+                                                <FormItem className="flex-1">
+                                                    <FormLabel className="text-slate-700">
+                                                        Card*
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Select
+                                                            onValueChange={
+                                                                field.onChange
+                                                            }
+                                                        >
+                                                            <SelectTrigger>
+                                                                <SelectValue
+                                                                    id="image_path"
+                                                                    placeholder="Select Card"
+                                                                    {...field}
+                                                                />
+                                                            </SelectTrigger>
+                                                            <SelectContent position="popper">
+                                                                <SelectItem value="/images/cards/amazon.png">
+                                                                    Amazon
+                                                                </SelectItem>
+                                                                <SelectItem value="/images/cards/itunes.png">
+                                                                    iTunes
+                                                                </SelectItem>
+                                                                <SelectItem value="/images/cards/google_play.png">
+                                                                    Google Play
+                                                                </SelectItem>
+                                                                <SelectItem value="/images/cards/steam.png">
+                                                                    Steam
+                                                                </SelectItem>
+                                                                <SelectItem value="/images/cards/others.png">
+                                                                    Other Cards
+                                                                </SelectItem>
+                                                            </SelectContent>
+                                                        </Select>
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="flag_path"
+                                            render={({ field }) => (
+                                                <FormItem className="flex-1">
+                                                    <FormLabel className="text-slate-700">
+                                                        Country*
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Select
+                                                            onValueChange={
+                                                                field.onChange
+                                                            }
+                                                        >
+                                                            <SelectTrigger>
+                                                                <SelectValue
+                                                                    id="flag_path"
+                                                                    placeholder="Select Flag"
+                                                                    {...field}
+                                                                />
+                                                            </SelectTrigger>
+                                                            <SelectContent position="popper">
+                                                                <SelectItem value="/images/flags/usa.png">
+                                                                    USA
+                                                                </SelectItem>
+                                                                <SelectItem value="/images/flags/canada.png">
+                                                                    Canada
+                                                                </SelectItem>
+                                                                <SelectItem value="/images/flags/australia.png">
+                                                                    Australia
+                                                                </SelectItem>
+                                                            </SelectContent>
+                                                        </Select>
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name="color"
+                                            render={({ field }) => (
+                                                <FormItem className="flex-1">
+                                                    <FormLabel className="text-slate-700">
+                                                        Color*
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Select
+                                                            onValueChange={
+                                                                field.onChange
+                                                            }
+                                                        >
+                                                            <SelectTrigger>
+                                                                <SelectValue
+                                                                    id="color"
+                                                                    placeholder="Select Color"
+                                                                    {...field}
+                                                                />
+                                                            </SelectTrigger>
+                                                            <SelectContent position="popper">
+                                                                <SelectItem value="bg-gradient-to-b from-blue-300 to-teal-400">
+                                                                    Gradient
+                                                                    Blue
+                                                                </SelectItem>
+                                                                <SelectItem value="bg-gradient-to-b from-indigo-500 to-violet-700">
+                                                                    Gradient
+                                                                    Indigo
+                                                                </SelectItem>
+                                                                <SelectItem value="bg-slate-700">
+                                                                    Slate
+                                                                </SelectItem>
+                                                                <SelectItem value="bg-white">
+                                                                    White
+                                                                </SelectItem>
+                                                            </SelectContent>
+                                                        </Select>
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <DialogFooter>
-                            <DialogClose>
+                            <DialogFooter>
+                                <DialogClose>
+                                    <Button
+                                        className="w-full sm:w-20"
+                                        variant="outline"
+                                        type="button"
+                                    >
+                                        Cancel
+                                    </Button>
+                                </DialogClose>
                                 <Button
-                                    className="w-full sm:w-20"
-                                    variant="outline"
-                                    type="button"
+                                    className="w-full sm:w-20 bg-gradient-to-b from-green-500 to-blue-700"
+                                    variant="default"
+                                    type="submit"
                                 >
-                                    Cancel
+                                    Add
                                 </Button>
-                            </DialogClose>
-                            <Button
-                                className="w-full sm:w-20 bg-gradient-to-b from-green-500 to-blue-700"
-                                variant="default"
-                                type="submit"
-                                disabled={processing}
-                            >
-                                Add
-                            </Button>
-                        </DialogFooter>
-                    </div>
-                </form>
+                            </DialogFooter>
+                        </div>
+                    </form>
+                </Form>
             </DialogContent>
         </Dialog>
     );

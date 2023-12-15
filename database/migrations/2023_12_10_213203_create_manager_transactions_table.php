@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('type');
-            $table->string('value');
+            $table->decimal('value');
             $table->string('return');
             $table->string('status');
             $table->string('date');
@@ -28,7 +28,7 @@ return new class extends Migration
         ManagerTransactions::create([
             'name' => 'United States Bank',
             'type' => 'Credit',
-            'value' => '$100',
+            'value' => '100',
             'return' => '#18000',
             'status' => 'Completed',
             'date' => '01/14/2019'

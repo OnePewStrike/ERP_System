@@ -42,14 +42,10 @@ import { router } from "@inertiajs/react";
 import Image from "@/Components/Custom/Image";
 
 const formSchema = z.object({
-    email: z.string().min(2, {
-        message: "Email must be at least 2 characters.",
-    }),
+    email: z.string(),
     type: z.string(),
     amount: z.string(),
-    date: z.string().min(2, {
-        message: "Date must be at least 2 characters.",
-    }),
+    date: z.string(),
     status: z.string(),
 });
 

@@ -4,7 +4,7 @@ import { PageProps } from "@/types";
 import { UsersDataTable } from "@/Components/Admins/Users/DataTable";
 import { Separator } from "@/Components/ui/separator";
 
-export default function Users({ auth }: PageProps) {
+export default function Users({ auth, users }) {
     return (
         <AdminLayout
             user={auth.user}
@@ -31,7 +31,7 @@ export default function Users({ auth }: PageProps) {
                     </div>
                 </div>
                 <div className="border border-gray-300 rounded-md px-3 bg-white">
-                    <UsersDataTable />
+                    <UsersDataTable data={users} />
                 </div>
             </div>
         </AdminLayout>

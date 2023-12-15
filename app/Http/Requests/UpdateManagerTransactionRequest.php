@@ -27,10 +27,10 @@ class UpdateManagerTransactionRequest extends FormRequest
         return [
             'name'   => ['required', 'string'],
             'type'   => ['required', 'string'],
-            'value'  => ['required', 'string'],
+            'value'  => ['required', 'integer'],
             'return' => ['required', 'string'],
             'status' => ['required', 'string'],
-            'date'   => ['required', 'string'],
+            'date'   => ['required', 'date'],
         ];
     }
 }

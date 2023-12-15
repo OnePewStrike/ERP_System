@@ -42,6 +42,7 @@ import { router } from "@inertiajs/react";
 import Image from "@/Components/Custom/Image";
 
 const formSchema = z.object({
+    id: z.number(),
     name: z.string().min(2, {
         message: "Name must be at least 2 characters.",
     }),
@@ -54,18 +55,20 @@ const formSchema = z.object({
 });
 
 interface EditDialogProps {
+    id: number;
     name: string;
     email: string;
     status: string;
 }
 
-const EditDialog: React.FC<EditDialogProps> = ({ name, email, status }) => {
+const EditDialog: React.FC<EditDialogProps> = ({ id, name, email, status }) => {
     const [open, setOpen] = useState(false);
 
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
+            id: id,
             name: name,
             email: email,
             status: status,
@@ -77,7 +80,7 @@ const EditDialog: React.FC<EditDialogProps> = ({ name, email, status }) => {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values);
-        router.post("", {
+        router.patch(`admin-users/${id}`, {
             ...values,
         });
         setOpen(false);

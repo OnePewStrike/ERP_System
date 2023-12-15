@@ -11,7 +11,7 @@ import { MdAutoGraph } from "react-icons/md";
 const nav_components = [
     {
         title: "Dashboard",
-        href: "/dashboard",
+        href: "/overview",
         icon: <GiEyeTarget style={{ color: "green" }} />,
     },
     {

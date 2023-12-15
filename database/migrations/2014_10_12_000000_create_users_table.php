@@ -23,6 +23,7 @@ return new class extends Migration
                 'admin',
                 'manager',
             ]);
+            $table->string('status')->nullabe();
             $table->string('phone')->nullable();
             $table->string('nationality')->nullable();
             $table->rememberToken();
@@ -34,6 +35,7 @@ return new class extends Migration
             'email' => 'admin@example.com',
             'password' => '12345',
             'type' => UserType::admin->value,
+            'status' => 'Active',
             'nationality' => 'Filipino',
             'phone' => '09123456789',
         ]);
@@ -43,6 +45,7 @@ return new class extends Migration
             'email' => 'manager@example.com',
             'password' => '12345',
             'type' => UserType::manager->value,
+            'status' => 'Active',
             'nationality' => 'Filipino',
             'phone' => '09123456789',
         ]);

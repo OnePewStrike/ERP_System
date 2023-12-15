@@ -54,7 +54,7 @@ const DeleteDialog: React.FC<EditDialogProps> = ({
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values);
-        router.delete(`/admin-payments/${id}`);
+        router.delete(`payments/${id}`);
         setOpen(false);
 
         // handleShowSuccessMessage();

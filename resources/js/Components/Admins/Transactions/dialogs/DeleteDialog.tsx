@@ -49,7 +49,7 @@ const DeleteDialog: React.FC<EditDialogProps> = ({
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            id: 0,
+            id: id,
         },
     });
 

@@ -16,26 +16,26 @@ class CardsController extends Controller
         ]);
     }
 
-    public function store(StoreCardRequest $cards) {
+    public function store(StoreCardRequest $request) {
 
-        $validated = $cards->validated();
+        $validated = $request->validated();
 
         Cards::create($validated);
 
         return back();
     }
 
-    public function update(UpdateCardRequest $cards, Cards $card)
+    public function update(UpdateCardRequest $request, Cards $admin_card)
     {
-        $validated = $cards->validated();
+        $validated = $request->validated();
 
-        $card->update($validated);
+        $admin_card->update($validated);
 
         return back();
     }
-    public function destroy(Cards $card)
+    public function destroy(Cards $admin_card)
     {
-        $card->delete();
+        $admin_card->delete();
         return back();
     }
 }

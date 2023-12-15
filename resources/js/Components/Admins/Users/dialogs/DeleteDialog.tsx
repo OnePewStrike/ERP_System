@@ -68,7 +68,7 @@ const DeleteDialog: React.FC<EditDialogProps> = ({
             <AlertDialogTrigger asChild>
                 <Button
                     variant="outline"
-                    className="justify-start w-full border-0 mt-1 mx-1 "
+                    className="justify-start w-full border-0"
                     size="sm"
                 >
                     Delete

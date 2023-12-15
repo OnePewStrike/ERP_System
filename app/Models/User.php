@@ -15,8 +15,9 @@ enum UserType: string {
  * @property string $email
  * @property mixed $password
  * @property UserType $type
- * @property string $nationality  // Add this line
- * @property string $phone        // Add this line
+ * @property string $status
+ * @property string $nationality
+ * @property string $phone
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -35,6 +36,7 @@ enum UserType: string {
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereNationality($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
@@ -62,6 +64,7 @@ class User extends Authenticatable
         'email',
         'password',
         'type',
+        'status',
         'nationality',
         'phone'
     ];

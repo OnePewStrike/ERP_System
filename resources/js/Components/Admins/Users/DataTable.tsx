@@ -41,68 +41,68 @@ import AddDialog from "./dialogs/AddDialog";
 import EditDialog from "./dialogs/EditDialog";
 import DeleteDialog from "./dialogs/DeleteDialog";
 
-const data: Users[] = [
-    {
-        id: 1,
-        name: "Ramon Ridwan",
-        email: "ramonridwan@gmail.com",
-        status: "Active",
-    },
-    {
-        id: 2,
-        name: "Sophia Johnson",
-        email: "sophia.johnson@example.com",
-        status: "Down",
-    },
-    {
-        id: 3,
-        name: "Oliver Smith",
-        email: "oliver.smith@example.com",
-        status: "Pending",
-    },
-    {
-        id: 4,
-        name: "Emma Davis",
-        email: "emma.davis@example.com",
-        status: "Active",
-    },
-    {
-        id: 5,
-        name: "Aiden Brown",
-        email: "aiden.brown@example.com",
-        status: "Down",
-    },
-    {
-        id: 6,
-        name: "Mia Wilson",
-        email: "mia.wilson@example.com",
-        status: "Active",
-    },
-    {
-        id: 7,
-        name: "Lucas Martinez",
-        email: "lucas.martinez@example.com",
-        status: "Pending",
-    },
-    {
-        id: 8,
-        name: "Isabella Taylor",
-        email: "isabella.taylor@example.com",
-        status: "Active",
-    },
-    {
-        id: 9,
-        name: "Liam Anderson",
-        email: "liam.anderson@example.com",
-        status: "Down",
-    },
-    {
-        id: 10,
-        name: "Ava Thomas",
-        email: "ava.thomas@example.com",
-        status: "Pending",
-    },
-];
+// const data: Users[] = [
+//     {
+//         id: 1,
+//         name: "Ramon Ridwan",
+//         email: "ramonridwan@gmail.com",
+//         status: "Active",
+//     },
+//     {
+//         id: 2,
+//         name: "Sophia Johnson",
+//         email: "sophia.johnson@example.com",
+//         status: "Down",
+//     },
+//     {
+//         id: 3,
+//         name: "Oliver Smith",
+//         email: "oliver.smith@example.com",
+//         status: "Pending",
+//     },
+//     {
+//         id: 4,
+//         name: "Emma Davis",
+//         email: "emma.davis@example.com",
+//         status: "Active",
+//     },
+//     {
+//         id: 5,
+//         name: "Aiden Brown",
+//         email: "aiden.brown@example.com",
+//         status: "Down",
+//     },
+//     {
+//         id: 6,
+//         name: "Mia Wilson",
+//         email: "mia.wilson@example.com",
+//         status: "Active",
+//     },
+//     {
+//         id: 7,
+//         name: "Lucas Martinez",
+//         email: "lucas.martinez@example.com",
+//         status: "Pending",
+//     },
+//     {
+//         id: 8,
+//         name: "Isabella Taylor",
+//         email: "isabella.taylor@example.com",
+//         status: "Active",
+//     },
+//     {
+//         id: 9,
+//         name: "Liam Anderson",
+//         email: "liam.anderson@example.com",
+//         status: "Down",
+//     },
+//     {
+//         id: 10,
+//         name: "Ava Thomas",
+//         email: "ava.thomas@example.com",
+//         status: "Pending",
+//     },
+// ];
 
 export type Users = {
     id: number;
@@ -157,7 +157,7 @@ export const columns: ColumnDef<Users>[] = [
     },
     {
         accessorKey: "email",
-        header: "email",
+        header: "Email",
         cell: ({ row }) => (
             <div className="text-sm text-slate-500">
                 {row.getValue("email")}
@@ -220,17 +220,21 @@ export const columns: ColumnDef<Users>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <a href="/users-view" className="text-sm">
-                            <DropdownMenuItem className="px-4">
+                        <a
+                            href="/users-view"
+                            className="text-sm hover:bg-gray-300 cursor-pointer"
+                        >
+                            <DropdownMenuItem className="px-4 py-2 my-1">
                                 View
                             </DropdownMenuItem>
                         </a>
                         <EditDialog
+                            id={data?.id}
                             name={data?.name}
                             email={data?.email}
                             status={data?.status}
                         />
-                        <DeleteDialog name={data?.name} />
+                        <DeleteDialog name={data?.id} />
                     </DropdownMenuContent>
                 </DropdownMenu>
             );
@@ -238,7 +242,7 @@ export const columns: ColumnDef<Users>[] = [
     },
 ];
 
-export function UsersDataTable() {
+export function UsersDataTable({ data }) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] =
         React.useState<ColumnFiltersState>([]);
@@ -281,7 +285,7 @@ export function UsersDataTable() {
                     }
                     className="max-w-sm"
                 />
-                <AddDialog />
+                {/* <AddDialog /> */}
                 {/* <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" className="ml-auto">

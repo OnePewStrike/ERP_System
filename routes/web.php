@@ -8,6 +8,7 @@ use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ManagerTransactionsController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -66,7 +67,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('admin-cards', CardsController::class);
 
-        Route::resource('admin-payments', PaymentsController::class)->names('admin.payments');
+        Route::resource('admin-payments', PaymentsController::class);
 
         Route::get('admin-statistics', function () {
             return Inertia::render('Admin/Statistics');
@@ -77,6 +78,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('admin-users', function () {
             return Inertia::render('Admin/Users');
         })->name('users');
+
+        Route::resource('admin-users', UserController::class);
 
         Route::get('admin-users-view', function () {
             return Inertia::render('Admin/UsersView');

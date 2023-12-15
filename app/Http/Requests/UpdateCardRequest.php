@@ -24,7 +24,7 @@ class UpdateCardRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'image_path' => ['required', 'string'],
-            'file_path' => ['required', 'string'],
+            'flag_path' => ['required', 'string'],
             'color' => ['required', 'string'],
         ];
     }
