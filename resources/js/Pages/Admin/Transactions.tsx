@@ -4,7 +4,7 @@ import { PageProps } from "@/types";
 import { Separator } from "@/Components/ui/separator";
 import { TransactionsDataTable } from "@/Components/Admins/Transactions/DataTable";
 
-export default function Transactions({ auth }) {
+export default function Transactions({ auth, transactions }) {
     return (
         <AdminLayout
             user={auth.user}
@@ -30,7 +30,7 @@ export default function Transactions({ auth }) {
                     </div>
                 </div>
                 <div className="border border-gray-300 rounded-md px-3 bg-white">
-                    <TransactionsDataTable />
+                    <TransactionsDataTable data={transactions} />
                 </div>
             </div>
         </AdminLayout>

@@ -128,7 +128,7 @@ export type Payments = {
     id: number;
     email: string;
     type: string;
-    amount: number;
+    amount: string;
     date: string;
     status: string;
 };
@@ -302,6 +302,7 @@ export const columns: ColumnDef<Payments>[] = [
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <EditDialog
+                            id={data?.id}
                             email={data?.email}
                             type={data?.type}
                             amount={data?.amount}

@@ -10,9 +10,6 @@ import InputLabel from "@/Components/Custom/InputLabel";
 
 import { Head, Link, useForm } from "@inertiajs/react";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-
 import {
     Dialog,
     DialogContent,
@@ -76,7 +73,7 @@ export default function AddDialog() {
         e.preventDefault();
 
         try {
-            post(route("admin-payments"));
+            post(route("admin-payments.store"));
 
             console.log("Form submitted successfully!");
 

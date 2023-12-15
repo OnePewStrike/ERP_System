@@ -56,7 +56,7 @@ export default function AddDialog() {
         e.preventDefault();
 
         try {
-            post(route("manager-transactions"));
+            post(route("manager-transactions.store"));
 
             console.log("Form submitted successfully!");
 

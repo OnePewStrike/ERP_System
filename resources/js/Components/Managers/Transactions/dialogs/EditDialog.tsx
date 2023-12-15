@@ -74,7 +74,16 @@ const EditDialog: React.FC<EditDialogProps> = ({
         e.preventDefault();
 
         try {
-            put(route(`manager-transactions.edit`));
+            put(route(`manager-transactions/${id}`), {
+                data: {
+                    name: name,
+                    type: type,
+                    value: value,
+                    return: returnData,
+                    date: date,
+                    status: status,
+                },
+            });
 
             console.log("Form submitted successfully!");
 

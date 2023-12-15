@@ -5,7 +5,7 @@ import { Separator } from "@/Components/ui/separator";
 import { TransactionsDataTable } from "@/Components/Admins/Transactions/DataTable";
 import CardTable from "@/Components/Admins/Cards/CardTable";
 
-export default function Cards({ auth }) {
+export default function Cards({ auth, cards }) {
     return (
         <AdminLayout
             user={auth.user}
@@ -31,7 +31,7 @@ export default function Cards({ auth }) {
                     </div>
                 </div>
                 <div className="h-full border border-gray-300 rounded-md px-3 bg-white">
-                    <CardTable />
+                    <CardTable data={cards} />
                 </div>
             </div>
         </AdminLayout>

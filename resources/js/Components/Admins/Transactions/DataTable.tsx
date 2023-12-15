@@ -133,7 +133,7 @@ export type Transactions = {
     status: string;
 };
 
-export function TransactionsDataTable({}) {
+export function TransactionsDataTable({ data }) {
     const columns: ColumnDef<Transactions>[] = [
         {
             id: "select",

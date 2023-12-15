@@ -16,18 +16,18 @@ class PaymentsController extends Controller
         ]);
     }
 
-    public function store(StorePaymentRequest $request) {
+    public function store(StorePaymentRequest $admin_payment) {
 
-        $validated = $request->validated();
+        $validated = $admin_payment->validated();
 
         Payments::create($validated);
 
         return back();
     }
 
-    public function update(UpdatePaymentRequest $request, Payments $payments)
+    public function update(UpdatePaymentRequest $admin_payment, Payments $payments)
     {
-        $validated = $request->validated();
+        $validated = $admin_payment->validated();
 
         $payments->update($validated);
 
