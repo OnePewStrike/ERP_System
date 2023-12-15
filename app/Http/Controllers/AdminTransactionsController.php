@@ -27,17 +27,17 @@ class AdminTransactionsController extends Controller
         return back();
     }
 
-    public function update(UpdateAdminTransactionRequest $request, AdminTransactions $admin_transactions)
+    public function update(UpdateAdminTransactionRequest $request, AdminTransactions $admin_transaction)
     {
         $validated = $request->validated();
 
-        $admin_transactions->update($validated);
+        $admin_transaction->update($validated);
 
         return back();
     }
-    public function destroy(AdminTransactions $admin_transactions)
+    public function destroy(AdminTransactions $admin_transaction)
     {
-        $admin_transactions->delete();
+        $admin_transaction->delete();
         return back();
     }
 }

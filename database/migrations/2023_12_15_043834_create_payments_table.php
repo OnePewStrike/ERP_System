@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('email');
             $table->string('type');
-            $table->decimal('amount');
+            $table->string('amount');
             $table->string('date');
             $table->string('status');
             $table->timestamps();

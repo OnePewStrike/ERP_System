@@ -48,7 +48,7 @@ const formSchema = z.object({
     card: z.string().min(2, {
         message: "Card must be at least 2 characters.",
     }),
-    amount: z.coerce.number(),
+    amount: z.string(),
     status: z.string().min(2, {
         message: "Status must be at least 2 characters.",
     }),
@@ -58,14 +58,16 @@ const formSchema = z.object({
 });
 
 interface EditDialogProps {
+    id: number;
     email: string;
     card: string;
-    amount: number;
+    amount: string;
     date: string;
     status: string;
 }
 
 const EditDialog: React.FC<EditDialogProps> = ({
+    id,
     email,
     card,
     amount,
@@ -88,10 +90,8 @@ const EditDialog: React.FC<EditDialogProps> = ({
 
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
         console.log(values);
-        router.post("", {
+        router.patch(`admin-transactions/${id}`, {
             ...values,
         });
         setOpen(false);
@@ -168,7 +168,11 @@ const EditDialog: React.FC<EditDialogProps> = ({
                                                         Product*
                                                     </FormLabel>
                                                     <FormControl>
-                                                        <Select>
+                                                        <Select
+                                                            onValueChange={
+                                                                field.onChange
+                                                            }
+                                                        >
                                                             <SelectTrigger>
                                                                 <SelectValue
                                                                     id="card"
@@ -232,7 +236,11 @@ const EditDialog: React.FC<EditDialogProps> = ({
                                                             Status*
                                                         </FormLabel>
                                                         <FormControl>
-                                                            <Select>
+                                                            <Select
+                                                                onValueChange={
+                                                                    field.onChange
+                                                                }
+                                                            >
                                                                 <SelectTrigger>
                                                                     <SelectValue
                                                                         id="status"

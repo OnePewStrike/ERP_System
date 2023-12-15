@@ -27,10 +27,10 @@ class StoreManagerTransactionRequest extends FormRequest
     {
         return [
             'name'   => ['required', 'string'],
-            'type'   => ['nullable', 'string'],
+            'type'   => ['required', 'string'],
             'value'  => ['required', 'string'],
             'return' => ['required', 'string'],
-            'status' => ['nullable', 'string'],
+            'status' => ['required', 'string'],
             'date'   => ['required', 'date'],
         ];
     }

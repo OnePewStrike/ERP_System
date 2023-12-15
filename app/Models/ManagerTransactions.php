@@ -35,8 +35,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereReturn($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereReturn($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ManagerTransactions whereDate($value)
@@ -48,7 +48,6 @@ class ManagerTransactions extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id',
         'name',
         'type',
         'value',

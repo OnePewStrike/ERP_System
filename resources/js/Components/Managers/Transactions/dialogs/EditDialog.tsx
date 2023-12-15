@@ -1,12 +1,13 @@
-import { useEffect, FormEventHandler, useState } from "react";
-import InputError from "@/Components/Custom/InputError";
-import InputLabel from "@/Components/Custom/InputLabel";
-import PrimaryButton from "@/Components/Custom/PrimaryButton";
-import TextInput from "@/Components/Custom/TextInput";
+import React, { useState } from "react";
+
 import { Button } from "@/Components/ui/button";
 import { Label } from "@/Components/ui/label";
 import { Input } from "@/Components/ui/input";
 import { Textarea } from "@/Components/ui/textarea";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 
 import {
     Dialog,
@@ -37,8 +38,28 @@ import {
     FormLabel,
     FormMessage,
 } from "@/Components/ui/form";
+import { router } from "@inertiajs/react";
 import Image from "@/Components/Custom/Image";
-import { Head, Link, useForm } from "@inertiajs/react";
+
+const formSchema = z.object({
+    name: z.string().min(2, {
+        message: "Name must be at least 2 characters.",
+    }),
+    email: z.string().min(2, {
+        message: "Email must be at least 2 characters.",
+    }),
+    type: z.string(),
+    status: z.string(),
+    value: z.string().min(2, {
+        message: "Value must be at least 2 characters.",
+    }),
+    return: z.string().min(2, {
+        message: "Return must be at least 2 characters.",
+    }),
+    date: z.string().min(2, {
+        message: "Date must be at least 2 characters.",
+    }),
+});
 
 interface EditDialogProps {
     id: number;
@@ -61,43 +82,36 @@ const EditDialog: React.FC<EditDialogProps> = ({
 }) => {
     const [open, setOpen] = useState(false);
 
-    const { data, setData, put, processing, errors, reset } = useForm({
-        name: name,
-        type: type,
-        value: value,
-        return: returnData,
-        status: status,
-        date: date,
+    // 1. Define your form.
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            name: name,
+            type: type,
+            value: value,
+            return: returnData,
+            status: status,
+            date: date,
+        },
     });
 
-    const submit: FormEventHandler = (e) => {
-        e.preventDefault();
-
-        try {
-            put(route(`manager-transactions/${id}`), {
-                data: {
-                    name: name,
-                    type: type,
-                    value: value,
-                    return: returnData,
-                    date: date,
-                    status: status,
-                },
-            });
-
-            console.log("Form submitted successfully!");
-
-            setOpen(false);
-        } catch (error) {
-            console.error("Form submission error:", error);
-            console.log("Server errors:", errors);
-        }
-    };
+    // 2. Define a submit handler.
+    function onSubmit(values: z.infer<typeof formSchema>) {
+        console.log(values);
+        router.patch(`manager-transactions/${id}`, {
+            ...values,
+        });
+        setOpen(false);
+    }
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button className="w-full justify-start" variant="ghost">
+                <Button
+                    className="flex justify-start bg-gradient-to-b from-green-500 to-blue-700"
+                    variant="default"
+                    size="sm"
+                >
                     Edit Transaction
                 </Button>
             </DialogTrigger>
@@ -107,199 +121,189 @@ const EditDialog: React.FC<EditDialogProps> = ({
                         Edit Transaction
                     </DialogTitle>
                 </DialogHeader>
-                <form onSubmit={submit}>
-                    <div className="grid cols-2 space-y-3">
-                        <div className="space-y-1">
-                            {/* <span className="text-xs font-bold">DETAILS</span> */}
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)}>
+                        <div className="grid cols-2 space-y-3">
                             <div className="space-y-1">
-                                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                                    <div>
-                                        <InputLabel
-                                            htmlFor="name"
-                                            value="Name"
-                                        />
-
-                                        <TextInput
-                                            id="name"
+                                {/* <span className="text-xs font-bold">DETAILS</span> */}
+                                <div className="space-y-1">
+                                    <div className="flex space-x-2">
+                                        <FormField
+                                            control={form.control}
                                             name="name"
-                                            value={data.name}
-                                            className="block w-full py-3 rounded-md"
-                                            autoComplete="name"
-                                            onChange={(e) =>
-                                                setData("name", e.target.value)
-                                            }
-                                            required
+                                            render={({ field }) => (
+                                                <FormItem className="flex-1">
+                                                    <FormLabel className="text-slate-700">
+                                                        Name*
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder=""
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
                                         />
-
-                                        <InputError
-                                            message={errors.name}
-                                            className=""
-                                        />
-                                    </div>
-                                    <div>
-                                        <InputLabel
-                                            htmlFor="type"
-                                            value="Type"
-                                        />
-                                        <select
-                                            id="type"
-                                            name="type"
-                                            value={data.type}
-                                            onChange={(e) =>
-                                                setData("type", e.target.value)
-                                            }
-                                            className="block w-full py-3 rounded-md border border-slate-300"
-                                            required
-                                        >
-                                            <option value="" disabled>
-                                                Select Type
-                                            </option>
-                                            <option value="Credit">
-                                                Credit
-                                            </option>
-                                            <option value="Debit">Debit</option>
-                                        </select>
-                                        <InputError
-                                            message={errors.type}
-                                            className=""
-                                        />
-                                    </div>
-                                </div>
-                                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                                    <div>
-                                        <InputLabel
-                                            htmlFor="value"
-                                            value="Value"
-                                        />
-
-                                        <TextInput
-                                            id="value"
-                                            name="value"
-                                            value={data.value}
-                                            className="block w-full py-3 rounded-md"
-                                            autoComplete="value"
-                                            onChange={(e) =>
-                                                setData("value", e.target.value)
-                                            }
-                                            required
-                                        />
-
-                                        <InputError
-                                            message={errors.value}
-                                            className=""
-                                        />
-                                    </div>
-                                    <div>
-                                        <InputLabel
-                                            htmlFor="return"
-                                            value="Return"
-                                        />
-
-                                        <TextInput
-                                            id="return"
-                                            name="return"
-                                            value={data.return}
-                                            className="block w-full py-3 rounded-md"
-                                            autoComplete="return"
-                                            onChange={(e) =>
-                                                setData(
-                                                    "return",
-                                                    e.target.value
-                                                )
-                                            }
-                                            required
-                                        />
-
-                                        <InputError
-                                            message={errors.return}
-                                            className=""
-                                        />
-                                    </div>
-                                </div>
-                                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                                    <div>
-                                        <InputLabel
-                                            htmlFor="status"
-                                            value="Status"
-                                        />
-                                        <select
-                                            id="status"
-                                            name="status"
-                                            value={data.status}
-                                            onChange={(e) =>
-                                                setData(
-                                                    "status",
-                                                    e.target.value
-                                                )
-                                            }
-                                            className="block w-full py-3 rounded-md border border-slate-300"
-                                            required
-                                        >
-                                            <option value="" disabled>
-                                                Select Status
-                                            </option>
-                                            <option value="Completed">
-                                                Completed
-                                            </option>
-                                            <option value="In Progress">
-                                                In Progress
-                                            </option>
-                                            <option value="Failed">
-                                                Failed
-                                            </option>
-                                        </select>
-                                        <InputError
-                                            message={errors.status}
-                                            className=""
-                                        />
-                                    </div>
-                                    <div>
-                                        <InputLabel
-                                            htmlFor="date"
-                                            value="Date"
-                                        />
-
-                                        <TextInput
-                                            id="date"
+                                        <FormField
+                                            control={form.control}
                                             name="date"
-                                            value={data.date}
-                                            className="block w-full py-3 rounded-md"
-                                            autoComplete="date"
-                                            onChange={(e) =>
-                                                setData("date", e.target.value)
-                                            }
-                                            required
+                                            render={({ field }) => (
+                                                <FormItem className="flex-1">
+                                                    <FormLabel className="text-slate-700">
+                                                        Date*
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder=""
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
                                         />
-
-                                        <InputError
-                                            message={errors.date}
-                                            className=""
+                                    </div>
+                                    <div className="flex space-x-2">
+                                        <FormField
+                                            control={form.control}
+                                            name="type"
+                                            render={({ field }) => (
+                                                <FormItem className="flex-1">
+                                                    <FormLabel className="text-slate-700">
+                                                        Type*
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Select
+                                                            onValueChange={
+                                                                field.onChange
+                                                            }
+                                                        >
+                                                            <SelectTrigger>
+                                                                <SelectValue
+                                                                    id="type"
+                                                                    placeholder="Select Type"
+                                                                    {...field}
+                                                                />
+                                                            </SelectTrigger>
+                                                            <SelectContent position="popper">
+                                                                <SelectItem value="Credit">
+                                                                    Credit
+                                                                </SelectItem>
+                                                                <SelectItem value="Debit">
+                                                                    Debit
+                                                                </SelectItem>
+                                                            </SelectContent>
+                                                        </Select>
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
                                         />
+                                        <FormField
+                                            control={form.control}
+                                            name="value"
+                                            render={({ field }) => (
+                                                <FormItem className="flex-1">
+                                                    <FormLabel className="text-slate-700">
+                                                        Value*
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder=""
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <div className="flex space-x-2">
+                                            <FormField
+                                                control={form.control}
+                                                name="return"
+                                                render={({ field }) => (
+                                                    <FormItem className="flex-1">
+                                                        <FormLabel className="text-slate-700">
+                                                            Return*
+                                                        </FormLabel>
+                                                        <FormControl>
+                                                            <Input
+                                                                placeholder=""
+                                                                {...field}
+                                                            />
+                                                        </FormControl>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                            <FormField
+                                                control={form.control}
+                                                name="status"
+                                                render={({ field }) => (
+                                                    <FormItem className="flex-1">
+                                                        <FormLabel className="text-slate-700">
+                                                            Status*
+                                                        </FormLabel>
+                                                        <FormControl>
+                                                            <Select
+                                                                onValueChange={
+                                                                    field.onChange
+                                                                }
+                                                            >
+                                                                <SelectTrigger>
+                                                                    <SelectValue
+                                                                        id="status"
+                                                                        placeholder="Select Status"
+                                                                        {...field}
+                                                                    />
+                                                                </SelectTrigger>
+                                                                <SelectContent position="popper">
+                                                                    <SelectItem value="Completed">
+                                                                        Completed
+                                                                    </SelectItem>
+                                                                    <SelectItem value="In Progress">
+                                                                        In
+                                                                        Progress
+                                                                    </SelectItem>
+                                                                    <SelectItem value="Failed">
+                                                                        Failed
+                                                                    </SelectItem>
+                                                                </SelectContent>
+                                                            </Select>
+                                                        </FormControl>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <DialogFooter>
-                            <DialogClose>
+                            <DialogFooter>
+                                <DialogClose>
+                                    <Button
+                                        className="w-full sm:w-20"
+                                        variant="outline"
+                                        type="button"
+                                    >
+                                        Cancel
+                                    </Button>
+                                </DialogClose>
                                 <Button
-                                    className="w-full sm:w-20"
-                                    variant="outline"
-                                    type="button"
+                                    className="w-full sm:w-20 bg-gradient-to-b from-green-500 to-blue-700"
+                                    variant="default"
+                                    type="submit"
                                 >
-                                    Cancel
+                                    Update
                                 </Button>
-                            </DialogClose>
-                            <Button
-                                className="w-full sm:w-20 bg-gradient-to-b from-green-500 to-blue-700"
-                                variant="default"
-                                type="submit"
-                                disabled={processing}
-                            >
-                                Update
-                            </Button>
-                        </DialogFooter>
-                    </div>
-                </form>
+                            </DialogFooter>
+                        </div>
+                    </form>
+                </Form>
             </DialogContent>
         </Dialog>
     );

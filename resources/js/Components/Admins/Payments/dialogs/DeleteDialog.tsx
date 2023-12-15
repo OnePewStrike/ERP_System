@@ -48,16 +48,13 @@ const DeleteDialog: React.FC<EditDialogProps> = ({
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            id: 0,
-        },
+        defaultValues: { id: id },
     });
 
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        router.delete(`/criterion/${id}`);
+        console.log(values);
+        router.delete(`/admin-payments/${id}`);
         setOpen(false);
 
         // handleShowSuccessMessage();

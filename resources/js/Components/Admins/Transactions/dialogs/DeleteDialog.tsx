@@ -57,7 +57,7 @@ const DeleteDialog: React.FC<EditDialogProps> = ({
     function onSubmit(values: z.infer<typeof formSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
-        router.delete(`/criterion/${id}`);
+        router.delete(`admin-transactions/${id}`);
         setOpen(false);
 
         // handleShowSuccessMessage();

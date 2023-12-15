@@ -41,7 +41,6 @@ class AdminTransactions extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id',
         'email',
         'card',
         'amount',

@@ -25,7 +25,7 @@ class StoreAdminTransactionRequest extends FormRequest
             'email'   => ['required', 'email', 'string'],
             'card'  => ['required', 'string'],
             'amount' => ['required', 'integer'],
-            'status' => ['nullable', 'string'],
+            'status' => ['required', 'string'],
             'date'   => ['required', 'date'],
         ];
     }

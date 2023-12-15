@@ -309,7 +309,7 @@ export const columns: ColumnDef<Payments>[] = [
                             status={data?.status}
                             date={data?.date}
                         />
-                        <DeleteDialog name={data?.email} />
+                        <DeleteDialog id={data?.id} />
                     </DropdownMenuContent>
                 </DropdownMenu>
             );

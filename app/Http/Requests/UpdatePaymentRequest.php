@@ -24,7 +24,7 @@ class UpdatePaymentRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email'],
             'type' => ['required', 'string'],
-            'amount' => ['required', 'integer'],
+            'amount' => ['required', 'string'],
             'date' => ['required', 'date'],
             'status' => ['required', 'string'],
         ];

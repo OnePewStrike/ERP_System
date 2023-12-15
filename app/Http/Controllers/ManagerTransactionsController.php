@@ -29,17 +29,17 @@ class ManagerTransactionsController extends Controller
         return back();
     }
 
-    public function update(UpdateManagerTransactionRequest $request, ManagerTransactions $managerTransaction)
+    public function update(UpdateManagerTransactionRequest $request, ManagerTransactions $manager_transaction)
     {
         $validated = $request->validated();
 
-        $managerTransaction->update($validated);
+        $manager_transaction->update($validated);
 
         return back();
     }
-    public function destroy(ManagerTransactions $managerTransactions)
+    public function destroy(ManagerTransactions $manager_transaction)
     {
-        $managerTransactions->delete();
+        $manager_transaction->delete();
         return back();
     }
 }

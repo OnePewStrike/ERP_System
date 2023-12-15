@@ -41,88 +41,88 @@ import AddDialog from "./dialogs/AddDialog";
 import DeleteDialog from "./dialogs/DeleteDialog";
 import EditDialog from "./dialogs/EditDialog";
 
-const data: Transactions[] = [
-    {
-        id: 1,
-        email: "ramonridwan@gmail.com",
-        card: "Bitcoin",
-        amount: 39000,
-        date: "19/08/2018",
-        status: "Successful",
-    },
-    {
-        id: 2,
-        email: "john.doe@example.com",
-        card: "Amazon Card",
-        amount: 1500,
-        date: "22/05/2020",
-        status: "Pending",
-    },
-    {
-        id: 3,
-        email: "alice.smith@example.com",
-        card: "Steam Card",
-        amount: 25000,
-        date: "10/11/2019",
-        status: "Processing",
-    },
-    {
-        id: 4,
-        email: "bob.jones@example.com",
-        card: "iTunes Card",
-        amount: 5000,
-        date: "03/04/2022",
-        status: "Cancelled",
-    },
-    {
-        id: 5,
-        email: "emma.jackson@example.com",
-        card: "Etherium",
-        amount: 120000,
-        date: "15/09/2021",
-        status: "Successful",
-    },
-    {
-        id: 6,
-        email: "david.brown@example.com",
-        card: "Uber Card",
-        amount: 7500,
-        date: "28/02/2023",
-        status: "Pending",
-    },
-    {
-        id: 7,
-        email: "susan.white@example.com",
-        card: "Amazon Card",
-        amount: 3200,
-        date: "07/07/2022",
-        status: "Processing",
-    },
-    {
-        id: 8,
-        email: "peter.wilson@example.com",
-        card: "Steam Card",
-        amount: 18000,
-        date: "14/12/2020",
-        status: "Cancelled",
-    },
-    {
-        id: 9,
-        email: "olivia.martin@example.com",
-        card: "iTunes Card",
-        amount: 4200,
-        date: "25/06/2019",
-        status: "Successful",
-    },
-    {
-        id: 10,
-        email: "william.taylor@example.com",
-        card: "Etherium",
-        amount: 98000,
-        date: "02/03/2022",
-        status: "Pending",
-    },
-];
+// const data: Transactions[] = [
+//     {
+//         id: 1,
+//         email: "ramonridwan@gmail.com",
+//         card: "Bitcoin",
+//         amount: 39000,
+//         date: "19/08/2018",
+//         status: "Successful",
+//     },
+//     {
+//         id: 2,
+//         email: "john.doe@example.com",
+//         card: "Amazon Card",
+//         amount: 1500,
+//         date: "22/05/2020",
+//         status: "Pending",
+//     },
+//     {
+//         id: 3,
+//         email: "alice.smith@example.com",
+//         card: "Steam Card",
+//         amount: 25000,
+//         date: "10/11/2019",
+//         status: "Processing",
+//     },
+//     {
+//         id: 4,
+//         email: "bob.jones@example.com",
+//         card: "iTunes Card",
+//         amount: 5000,
+//         date: "03/04/2022",
+//         status: "Cancelled",
+//     },
+//     {
+//         id: 5,
+//         email: "emma.jackson@example.com",
+//         card: "Etherium",
+//         amount: 120000,
+//         date: "15/09/2021",
+//         status: "Successful",
+//     },
+//     {
+//         id: 6,
+//         email: "david.brown@example.com",
+//         card: "Uber Card",
+//         amount: 7500,
+//         date: "28/02/2023",
+//         status: "Pending",
+//     },
+//     {
+//         id: 7,
+//         email: "susan.white@example.com",
+//         card: "Amazon Card",
+//         amount: 3200,
+//         date: "07/07/2022",
+//         status: "Processing",
+//     },
+//     {
+//         id: 8,
+//         email: "peter.wilson@example.com",
+//         card: "Steam Card",
+//         amount: 18000,
+//         date: "14/12/2020",
+//         status: "Cancelled",
+//     },
+//     {
+//         id: 9,
+//         email: "olivia.martin@example.com",
+//         card: "iTunes Card",
+//         amount: 4200,
+//         date: "25/06/2019",
+//         status: "Successful",
+//     },
+//     {
+//         id: 10,
+//         email: "william.taylor@example.com",
+//         card: "Etherium",
+//         amount: 98000,
+//         date: "02/03/2022",
+//         status: "Pending",
+//     },
+// ];
 
 export type Transactions = {
     id: number;
@@ -315,6 +315,7 @@ export function TransactionsDataTable({ data }) {
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <EditDialog
+                                id={data?.id}
                                 email={data?.email}
                                 card={data?.card}
                                 amount={data?.amount}

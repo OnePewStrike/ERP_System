@@ -65,6 +65,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         Route::resource('admin-cards', CardsController::class);
+
         Route::resource('admin-payments', PaymentsController::class)->names('admin.payments');
 
         Route::get('admin-statistics', function () {
@@ -82,8 +83,6 @@ Route::middleware(['auth'])->group(function () {
         })->name('users-view');
     });
 });
-
-
 
 
 Route::middleware('auth')->group(function () {
