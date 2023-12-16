@@ -15,6 +15,7 @@ export default function Register() {
         password: "",
         password_confirmation: "",
         type: "manager",
+        status: "Active",
     });
 
     useEffect(() => {
